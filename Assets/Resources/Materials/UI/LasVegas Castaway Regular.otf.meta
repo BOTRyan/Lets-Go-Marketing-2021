@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 43541ebb7015f77409f3a3c1d1b3031b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: LasVegas Castaway
+  fontNames:
+  - LasVegas Castaway
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 839561a9d8bd4d9428910240ffb9a16c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

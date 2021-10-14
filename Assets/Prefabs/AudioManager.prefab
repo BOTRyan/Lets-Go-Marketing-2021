@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &92722034716286933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7028675669295369327}
+  - component: {fileID: 6312609717840722694}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7028675669295369327
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92722034716286933}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2337158, y: -0.025701523, z: 7.3831244}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6312609717840722694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92722034716286933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b475a4fdb3688b46b17277462ba3359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Brand Crisis
+    clip: {fileID: 8300000, guid: 7f3b441e3dbb42841bc3a46b61f28d76, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Career Point
+    clip: {fileID: 8300000, guid: 88f3fef9a1865454ab7509385ff7b5d6, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Did You Know
+    clip: {fileID: 8300000, guid: 757d0e746d03af646ad87f7ec142a065, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: You're the Boss
+    clip: {fileID: 8300000, guid: d59614da77cbd0e48b38bb327df1f761, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Card Flip
+    clip: {fileID: 8300000, guid: 5a8afba357096984d9ce346b0d2841ec, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Token Added
+    clip: {fileID: 8300000, guid: 1d3040df08c6566479ed786ac12c6612, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Theme
+    clip: {fileID: 8300000, guid: dfa786a547433e24b82af05b94c52d3a, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioMixerGroup: {fileID: 5185950587805335945, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Click
+    clip: {fileID: 8300000, guid: b0ecd31904c9bbc46a831e1cd710ed68, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Bark0
+    clip: {fileID: 8300000, guid: 4dd01ea4c8822014bb45f94c3fa1051e, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Bark1
+    clip: {fileID: 8300000, guid: b83b468df93e52f46a807fe437d53e4b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Bark2
+    clip: {fileID: 8300000, guid: 5267827e5c200fb44a385698368b9f54, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Win
+    clip: {fileID: 8300000, guid: 5b310ee8242203e4abadcf63b3abc8b6, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Walk
+    clip: {fileID: 8300000, guid: fb6c0f5b1c976484d83eb09c5652299e, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  - name: Spinner
+    clip: {fileID: 8300000, guid: 72ff8d8ce7a354e47a65893b17f2dee2, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    audioMixerGroup: {fileID: 7631116998072173171, guid: 8c29a8653e2fe5946822d561682f3f2b,
+      type: 2}
+    source: {fileID: 0}
+  mixer: {fileID: 24100000, guid: 8c29a8653e2fe5946822d561682f3f2b, type: 2}
