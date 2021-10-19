@@ -22,7 +22,8 @@ public class FinalButtons : MonoBehaviour
 
     public void playAgain()
     {
-        Destroy(GameManager.instance.gameObject);
+        if (GameManager.instance)
+            Destroy(GameManager.instance.gameObject);
         SceneManager.LoadScene("startScene");
     }
 
