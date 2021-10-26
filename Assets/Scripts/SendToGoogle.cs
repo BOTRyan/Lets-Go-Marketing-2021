@@ -250,6 +250,8 @@ public class SendToGoogle : MonoBehaviour
         form.Add(new MultipartFormDataSection("entry.806798460", durationIn));
 
         UnityWebRequest www = UnityWebRequest.Post(postURL, form);
+        www.SetRequestHeader("Access-Control-Allow-Credentials", "true");
+        www.SetRequestHeader("Access-Control-Allow-Origin", "*");
 
         yield return www.SendWebRequest();
 
@@ -368,12 +370,12 @@ public class SendToGoogle : MonoBehaviour
             Normal = manager.players[i].GetComponent<PlayerInfo>().spaces[4].ToString();
 
             Debug.Log("Starting Coroutine");
-            StartCoroutine(Post(Name, Email, Field, Career, Color, TokenA, TokenG, TokenB, TokenM, TokenD, TokenP, YTB, DYK, CP, BC, Normal));
+            //StartCoroutine(Post(Name, Email, Field, Career, Color, TokenA, TokenG, TokenB, TokenM, TokenD, TokenP, YTB, DYK, CP, BC, Normal));
             if (Email != "" && Email == "Not Entered") StartCoroutine(SendMailRequestToServer(Name, Email, Career, Placement));
         }
 
         //send Duration
         Duration = ((manager.gameTime) / 60f).ToString();
-        StartCoroutine(PostGameData(Duration));
+        //StartCoroutine(PostGameData(Duration));
     }//Send()
 }
