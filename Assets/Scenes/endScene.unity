@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 435628}
   - component: {fileID: 435627}
   - component: {fileID: 435626}
+  - component: {fileID: 435629}
   m_Layer: 5
   m_Name: Career Field Button (2)
   m_TagString: Untagged
@@ -178,7 +179,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
@@ -251,6 +252,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435624}
   m_CullTransparentMesh: 0
+--- !u!95 &435629
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435624}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a2a09592c61e1c4690a08458bd5977b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &44099204
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,6 +283,7 @@ GameObject:
   - component: {fileID: 44099208}
   - component: {fileID: 44099207}
   - component: {fileID: 44099206}
+  - component: {fileID: 44099209}
   m_Layer: 5
   m_Name: Career Field Button (3)
   m_TagString: Untagged
@@ -308,7 +329,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
@@ -381,6 +402,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44099204}
   m_CullTransparentMesh: 0
+--- !u!95 &44099209
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44099204}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a2a09592c61e1c4690a08458bd5977b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &83813537
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,9 +479,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Business Data Analytics
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -744,9 +783,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Public Relations
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -901,9 +939,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1141,6 +1178,7 @@ GameObject:
   - component: {fileID: 200779717}
   - component: {fileID: 200779716}
   - component: {fileID: 200779715}
+  - component: {fileID: 200779718}
   m_Layer: 5
   m_Name: Career Field Button (1)
   m_TagString: Untagged
@@ -1186,7 +1224,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
@@ -1259,6 +1297,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200779713}
   m_CullTransparentMesh: 0
+--- !u!95 &200779718
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200779713}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a2a09592c61e1c4690a08458bd5977b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &211178948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,7 +1593,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: You're going to make a great User Experience Designer!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
     type: 2}
   m_fontSharedMaterials: []
@@ -2359,9 +2416,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Marketing
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2665,9 +2721,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2980,6 +3035,7 @@ GameObject:
   - component: {fileID: 897624210}
   - component: {fileID: 897624209}
   - component: {fileID: 897624208}
+  - component: {fileID: 897624211}
   m_Layer: 5
   m_Name: Career Field Button
   m_TagString: Untagged
@@ -3025,7 +3081,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
@@ -3098,6 +3154,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897624206}
   m_CullTransparentMesh: 0
+--- !u!95 &897624211
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897624206}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a2a09592c61e1c4690a08458bd5977b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &905500133
 GameObject:
   m_ObjectHideFlags: 0
@@ -3267,6 +3342,7 @@ GameObject:
   - component: {fileID: 947613500}
   - component: {fileID: 947613499}
   - component: {fileID: 947613498}
+  - component: {fileID: 947613501}
   m_Layer: 5
   m_Name: Career Field Button (5)
   m_TagString: Untagged
@@ -3312,7 +3388,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
@@ -3385,6 +3461,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947613496}
   m_CullTransparentMesh: 0
+--- !u!95 &947613501
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947613496}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a2a09592c61e1c4690a08458bd5977b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &969828730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3518,7 +3613,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Nice choice! You selected the Design Field!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
     type: 2}
   m_fontSharedMaterials: []
@@ -4027,9 +4122,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4239,6 +4333,7 @@ MonoBehaviour:
   quitBlur: {fileID: 0}
   buttonsHidden: 0
   quitIsOut: 0
+  googleScript: {fileID: 0}
 --- !u!114 &1318441104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4346,7 +4441,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -59.999756, y: 59.999878}
+  m_AnchoredPosition: {x: -59.999756, y: 59.999756}
   m_SizeDelta: {x: 68, y: 68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1332552261
@@ -4473,9 +4568,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5331,7 +5425,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: < Choose a different field
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
     type: 2}
   m_fontSharedMaterials: []
@@ -5442,6 +5536,7 @@ GameObject:
   - component: {fileID: 1707404272}
   - component: {fileID: 1707404271}
   - component: {fileID: 1707404270}
+  - component: {fileID: 1707404273}
   m_Layer: 5
   m_Name: Career Field Button (4)
   m_TagString: Untagged
@@ -5487,7 +5582,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
@@ -5560,6 +5655,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707404268}
   m_CullTransparentMesh: 0
+--- !u!95 &1707404273
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707404268}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a2a09592c61e1c4690a08458bd5977b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1815598806
 GameObject:
   m_ObjectHideFlags: 0
@@ -5775,9 +5889,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Design
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5932,7 +6045,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Pick a career that interests you!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
     type: 2}
   m_fontSharedMaterials: []
@@ -6089,9 +6202,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Graphic Media Management
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6555,9 +6667,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Advertising
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6786,9 +6897,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6943,9 +7053,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28244c37c5a9aba4e921403d4c9889b6, type: 2}
-  m_sharedMaterial: {fileID: 4304591781213232104, guid: 28244c37c5a9aba4e921403d4c9889b6,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
