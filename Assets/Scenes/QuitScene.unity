@@ -2681,6 +2681,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creditCard: {fileID: 134136171}
   creditBlur: {fileID: 775308268}
+  OnPress:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1784093573
 Transform:
   m_ObjectHideFlags: 0

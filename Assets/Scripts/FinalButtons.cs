@@ -3,16 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using System;
 
-public class FinalButtons : MonoBehaviour
+
+public class FinalButtons : MonoBehaviour, IPointerDownHandler
 {
     private bool creditsIsOut = false;
     public GameObject creditCard;
     public GameObject creditBlur;
 
+    /// MY STUFF begin
+    [Serializable]
+    public class ButtonPressEvent : UnityEvent { }
+
+    public ButtonPressEvent OnPress = new ButtonPressEvent();
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        OnPress.Invoke();
+    }
+
+    [DllImport("__Internal")]
+    private static extern void openWindow(string url);
+    public void OpenLinkJSPlugin()
+    {
+#if !UNITY_EDITOR
+		openWindow("https://ferrisdsgn.typeform.com/to/hIYzD9Jv");
+#endif
+    }
+    /// MY STUFF end
+
     public void feedbackSurvey()
     {
-        Application.OpenURL("https://ferrisdsgn.typeform.com/to/hIYzD9Jv");
+        OpenLinkJSPlugin(); // CHANGED THIS
     }
 
     public void lgmMain()
