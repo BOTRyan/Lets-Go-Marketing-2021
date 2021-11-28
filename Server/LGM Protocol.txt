@@ -1,0 +1,133 @@
+Let's Go Marketing Protocol (LGMP) v1.0
+===================================================
+
+Information on Server:
+- State of Board
+- Current Turn
+- Player Stats
+
+Packets from Server:
+--------------------
+
+JOIN (response) - When the server receives a JOIN packet, it must decide whether or 
+not the client is allowed to join.
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "JOIN"
+    4   1   uint8	join response
+
+    5   4   ascii	room name (if host)
+
+    (accepted:)
+    1: Host
+    2: Player
+    
+    (denied:)
+    3: Lobby full
+    4: Could not find room
+    5: Game already started
+
+REDY - Once the server receives a REDY packet, it'll set the username and avatar of the player
+that sent it, and update the other players of taken avatars
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "REDY"
+    4   1   uint8	username response
+    5	6   uint8 x6	current chosen avatars
+    
+    Accepted: 1
+    (denied:)
+    2: no username input
+    3: username too long
+    4: invalid characters
+    5: already taken
+    6: not allowed (profanity)
+
+GAME - updates the game board for host player, updates data for all other players
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "GAME"
+    4   1   uint8       current turn (1-6)
+    5   1   uint8	type of board space landed on (1-5)
+    6   56  uint8 x 56  number of players on each board space (maybe?)
+    
+CARD - if a space is supposed to send out a card to a player, send them the correct card
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "CARD"
+    4   1   uint8       type of card being sent
+    5   1   uint8       which card of given type is being sent
+
+FINL - once the game's completed, order the players by the place in which they finished
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "FINL"
+    4   6   uint8 x6    place of each player
+    10  ?   ascii x6	career of each player
+    ?   6   uint8 x6	salary of each player (/1000)
+
+RSET - reset the game back to either the lobby screen or a new room
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "RSET"
+    
+
+Packets from Client:
+--------------------
+
+JOIN (request) - after establishing a connection with the server, client will send a JOIN
+packet. The server will send back a response.
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "JOIN"
+    4	4   ascii	desired room
+
+REDY - once the user's joined, they will put in a username and a choice of avatar.
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "REDY"
+    4   1   uint8	length of username
+    5   ?   ascii	desired username
+    ?   1   uint8 	desired avatar
+
+STRT - once all players are ready, tell the server to start the game
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "STRT"
+
+SPIN - this packet should be submitted when the player spins the spinner
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "SPIN"
+    4   1   uint8	number landed on
+
+CARD - this packet should be submitted when the player responds to a card
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "CARD"
+    4  	1   uint8 	card action type (1 or 2)
+
+    5   1   int8        number of spaces to move (if 1)
+    5 	1   uint8 	numerical value of token to be added (if 2)
+
+CRER - this packet should be submitted when the player inputs their desired field and career after
+finishing the board
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "CRER"
+    4   1   uint8	field choice
+    5	1   uint8	length of career name
+    6	?   ascii	career choice
+    ?	1   uint8	salary of choice (/1000)
