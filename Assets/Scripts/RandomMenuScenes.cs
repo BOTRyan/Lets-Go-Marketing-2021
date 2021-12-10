@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class RandomMenuScenes : MonoBehaviour
 {
 
-    public Sprite advertScene, businessScene, designScene, mediaManagementScene, marketingScene, PRScene;
+    public Sprite businessScene, designScene, mediaManagementScene, marketingScene, PRScene;
     private List<Sprite> imgArray = new List<Sprite>();
 
     public GameObject disclaimer;
@@ -17,7 +17,7 @@ public class RandomMenuScenes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        imgArray.Add(advertScene);
+
         imgArray.Add(businessScene);
         imgArray.Add(designScene);
         imgArray.Add(mediaManagementScene);

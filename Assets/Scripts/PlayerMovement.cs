@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     public int targetPos = 1;
     public int currPos = 1;
+    public const int finalPos = 45;
 
     private float delay = 0f;
     private float alpha = 0f;
@@ -345,8 +346,9 @@ public class PlayerMovement : MonoBehaviour
 
                 // This checks if the player has to move forwards and moves them till
                 // they reach their target location
-                if (currPos < targetPos && currPos < 54)
+                if (currPos < targetPos && currPos < finalPos)
                 {
+                    
                     // If the player is moving due to the influence of a card
                     // then once they reach their target location, they swap turns
                     if (landedOnCard)
@@ -365,11 +367,12 @@ public class PlayerMovement : MonoBehaviour
                                     delay = 0f;
                                     alpha = 0;
                                     currPos++;
-                                    if (currPos == targetPos || currPos >= 54)
+                                    if (currPos == targetPos || currPos >= finalPos)
                                     {
+                                        
                                         switch (currPos)
                                         {
-                                            case 54:
+                                            case finalPos:
                                                 // Finished Game Cards
                                                 if (GameManager.instance.playersDone == 0)
                                                 {
@@ -413,7 +416,7 @@ public class PlayerMovement : MonoBehaviour
                                 alpha = 0;
                                 currPos++;
 
-                                if (currPos == targetPos || currPos >= 54)
+                                if (currPos == targetPos || currPos >= finalPos)
                                 {
                                     // This switch case checks which space the player landed on and flips card of swaps turn accordingly
                                     switch (currPos)
@@ -424,7 +427,7 @@ public class PlayerMovement : MonoBehaviour
                                         case 29:
                                         case 36:
                                         case 41:
-                                        case 47:
+                                        //case 47:
                                             // You're The Boss
                                             FlipCard(1);
                                             if (!GameManager.instance.bossModalOnce)
@@ -438,7 +441,7 @@ public class PlayerMovement : MonoBehaviour
                                         case 12:
                                         case 25:
                                         case 37:
-                                        case 53:
+                                        //case 53:
                                             // Career Point
                                             FlipCard(2);
                                             if (!GameManager.instance.pointModalOnce)
@@ -509,6 +512,7 @@ public class PlayerMovement : MonoBehaviour
                                                 GameManager.instance.didYouModalOnce = true;
                                             }
                                             break;
+                                            /*
                                         case 46:
                                         case 50:
                                             // Did You Know Blue
@@ -520,7 +524,8 @@ public class PlayerMovement : MonoBehaviour
                                                 GameManager.instance.didYouModalOnce = true;
                                             }
                                             break;
-                                        case 54:
+                                            */
+                                        case finalPos:
                                             // Finished Game Cards
                                             if (GameManager.instance.playersDone == 0)
                                             {
@@ -558,7 +563,7 @@ public class PlayerMovement : MonoBehaviour
                 /// </summary>
                 else if (GameManager.instance.playersDone < GameManager.instance.currPlayers)
                 {
-                    if (currPos >= 54 && !hasFinished)
+                    if (currPos >= 48 && !hasFinished)
                     {
                         if (CardAnimation.instance.finishCardUp)
                         {
@@ -645,7 +650,7 @@ public class PlayerMovement : MonoBehaviour
             Spinner.instance.Rollednumber.text = "";
         }
         checkPlayerOffset();
-        if (currPos >= 54) hasFinished = true;
+        if (currPos >= 44) hasFinished = true;
         GameManager.instance.currPlayerTurn++;
     }
 
@@ -829,30 +834,7 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = true;
         }
         else GetComponent<SpriteRenderer>().flipX = false;
-        if (baseDog == redSit)
-        {
-            GetComponent<SpriteRenderer>().sprite = redSit;
-        }
-        else if (baseDog == blueSit)
-        {
-            GetComponent<SpriteRenderer>().sprite = blueSit;
-        }
-        else if (baseDog == greenSit)
-        {
-            GetComponent<SpriteRenderer>().sprite = greenSit;
-        }
-        else if (baseDog == pinkSit)
-        {
-            GetComponent<SpriteRenderer>().sprite = pinkSit;
-        }
-        else if (baseDog == yelSit)
-        {
-            GetComponent<SpriteRenderer>().sprite = yelSit;
-        }
-        else if (baseDog == purpSit)
-        {
-            GetComponent<SpriteRenderer>().sprite = purpSit;
-        }
+        GetComponent<SpriteRenderer>().sprite = baseDog;
     }
 
     private void spritesUpdate()

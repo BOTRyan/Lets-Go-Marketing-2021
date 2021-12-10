@@ -20,9 +20,9 @@ public class EndGameManager : MonoBehaviour
     private bool lower = false;
 
     public GameObject fPlayerName;
-    public GameObject aTokens, gmmTokens, bdaTokens, mTokens, gdTokens, prTokens;
+    public GameObject gmmTokens, bdaTokens, mTokens, gdTokens, prTokens;
 
-    private Sprite aBack, bdaBack, mBack, gmmBack, prBack, dBack;
+    private Sprite bdaBack, mBack, gmmBack, prBack, dBack;
     private Sprite advertAccount, bpManager, salesProf, marketResearchS, mDirector, salesManage, freelancer, healthMarketer, gmTech, gmTechSales, customerProject, bdAnalyst, marketResearchA, sysArch, creativeDirect, researchDirect, mPlanner, uxDesign, uiDesign, contentStrategist, corpCommManager, prDirect;
 
 
@@ -54,7 +54,7 @@ public class EndGameManager : MonoBehaviour
         corpCommManager = Resources.Load<Sprite>("Materials/Job Cards/jc-yellow2");
         prDirect = Resources.Load<Sprite>("Materials/Job Cards/jc-yellow4");
 
-        aBack = Resources.Load<Sprite>("Materials/Background/FieldChoices/Advertisement");
+        //aBack = Resources.Load<Sprite>("Materials/Background/FieldChoices/Advertisement");
         bdaBack = Resources.Load<Sprite>("Materials/Background/FieldChoices/Business Data");
         mBack = Resources.Load<Sprite>("Materials/Background/FieldChoices/Marketing");
         gmmBack = Resources.Load<Sprite>("Materials/Background/FieldChoices/Graphic Media");
@@ -129,9 +129,9 @@ public class EndGameManager : MonoBehaviour
         switch (choice)
         {
             case "Design":
-                careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-purple1");
-                careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-red2");
-                careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-red3");
+                careerOptionLeft.GetComponent<Image>().sprite = creativeDirect;
+                careerOptionMid.GetComponent<Image>().sprite = uxDesign;
+                careerOptionRight.GetComponent<Image>().sprite = uiDesign;
                 upArrow.SetActive(false);
                 downArrow.SetActive(false);
                 fieldBackdrop.GetComponent<Image>().sprite = dBack;
@@ -141,48 +141,50 @@ public class EndGameManager : MonoBehaviour
                 downArrow.SetActive(true);
                 if (lower)
                 {
-                    careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-yellow1");
-                    careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-yellow2");
-                    careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-yellow4");
+                    careerOptionLeft.GetComponent<Image>().sprite = contentStrategist;
+                    careerOptionMid.GetComponent<Image>().sprite = corpCommManager;
+                    careerOptionRight.GetComponent<Image>().sprite = prDirect;
                 }
                 else
                 {
-                    careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue4");
-                    careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue5");
-                    careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue6");
+                    careerOptionLeft.GetComponent<Image>().sprite = marketResearchS;
+                    careerOptionMid.GetComponent<Image>().sprite = mDirector;
+                    careerOptionRight.GetComponent<Image>().sprite = salesManage;
                 }
                 fieldBackdrop.GetComponent<Image>().sprite = prBack;
                 break;
             case "Graphic Media Management":
 
-                careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-green1");
-                careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-green2");
-                careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-green3");
+                careerOptionLeft.GetComponent<Image>().sprite = gmTech;
+                careerOptionMid.GetComponent<Image>().sprite = gmTechSales;
+                careerOptionRight.GetComponent<Image>().sprite = customerProject;
                 upArrow.SetActive(false);
                 downArrow.SetActive(false);
                 fieldBackdrop.GetComponent<Image>().sprite = gmmBack;
                 break;
-            case "Advertising":
-                upArrow.SetActive(true);
-                downArrow.SetActive(true);
-                if (lower)
-                {
-                    careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue1");
-                    careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue2");
-                    careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue3");
-                }
-                else
-                {
-                    careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue4");
-                    careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue7");
-                    careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue8");
-                }
-                fieldBackdrop.GetComponent<Image>().sprite = aBack;
-                break;
+            /*
+        case "Advertising":
+            upArrow.SetActive(true);
+            downArrow.SetActive(true);
+            if (lower)
+            {
+                careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue1");
+                careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue2");
+                careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue3");
+            }
+            else
+            {
+                careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue4");
+                careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue7");
+                careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue8");
+            }
+            fieldBackdrop.GetComponent<Image>().sprite = aBack;
+            break;
+            */
             case "Business Data Analytics":
-                careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-pink1");
-                careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-pink2");
-                careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-pink3");
+                careerOptionLeft.GetComponent<Image>().sprite = bdAnalyst;
+                careerOptionMid.GetComponent<Image>().sprite = marketResearchA;
+                careerOptionRight.GetComponent<Image>().sprite = sysArch;
                 upArrow.SetActive(false);
                 downArrow.SetActive(false);
                 fieldBackdrop.GetComponent<Image>().sprite = bdaBack;
@@ -192,15 +194,15 @@ public class EndGameManager : MonoBehaviour
                 downArrow.SetActive(true);
                 if (lower)
                 {
-                    careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-purple1");
-                    careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-purple2");
-                    careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-purple3");
+                    careerOptionLeft.GetComponent<Image>().sprite = creativeDirect;
+                    careerOptionMid.GetComponent<Image>().sprite = researchDirect;
+                    careerOptionRight.GetComponent<Image>().sprite = mPlanner;
                 }
                 else
                 {
-                    careerOptionLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue1");
-                    careerOptionMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue2");
-                    careerOptionRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("Materials/Job Cards/jc-blue3");
+                    careerOptionLeft.GetComponent<Image>().sprite = advertAccount;
+                    careerOptionMid.GetComponent<Image>().sprite = bpManager;
+                    careerOptionRight.GetComponent<Image>().sprite = salesProf;
                 }
                 fieldBackdrop.GetComponent<Image>().sprite = mBack;
                 break;
@@ -282,7 +284,7 @@ public class EndGameManager : MonoBehaviour
                 congratsPlayer.GetComponent<TMPro.TextMeshProUGUI>().text = "Kudos on your new career path, " + cPlayerName.GetComponent<TMPro.TextMeshProUGUI>().text + "!";
                 break;
             case 2:
-                congratsPlayer.GetComponent<TMPro.TextMeshProUGUI>().text = "I'm impressed! Nice choice, " + cPlayerName.GetComponent<TMPro.TextMeshProUGUI>().text + "!";
+                congratsPlayer.GetComponent<TMPro.TextMeshProUGUI>().text = "I'm imporessed! Nice choice, " + cPlayerName.GetComponent<TMPro.TextMeshProUGUI>().text + "!";
                 break;
             case 3:
                 congratsPlayer.GetComponent<TMPro.TextMeshProUGUI>().text = "What an awesome career choice, " + cPlayerName.GetComponent<TMPro.TextMeshProUGUI>().text + "!";
@@ -311,7 +313,7 @@ public class EndGameManager : MonoBehaviour
         gdTokens.GetComponent<TMPro.TextMeshProUGUI>().text = " x " + GameManager.instance.players[currPlayer].GetComponent<PlayerInfo>().tokens[2].ToString();
         bdaTokens.GetComponent<TMPro.TextMeshProUGUI>().text = " x " + GameManager.instance.players[currPlayer].GetComponent<PlayerInfo>().tokens[3].ToString();
         prTokens.GetComponent<TMPro.TextMeshProUGUI>().text = " x " + GameManager.instance.players[currPlayer].GetComponent<PlayerInfo>().tokens[4].ToString();
-        aTokens.GetComponent<TMPro.TextMeshProUGUI>().text = " x " + GameManager.instance.players[currPlayer].GetComponent<PlayerInfo>().tokens[5].ToString();
+        //aTokens.GetComponent<TMPro.TextMeshProUGUI>().text = " x " + GameManager.instance.players[currPlayer].GetComponent<PlayerInfo>().tokens[5].ToString();
         //fLearnMore.GetComponent<TMPro.TextMeshProUGUI>().text = GameManager.instance.players[currPlayer].GetComponent<PlayerInfo>().playerName + ", want to learn more or schedule a visit to Ferris State's campus? Enter your email to find out more!";
 
         cPlayerName.GetComponent<TMPro.TextMeshProUGUI>().text = GameManager.instance.players[currPlayer].GetComponent<PlayerInfo>().playerName;

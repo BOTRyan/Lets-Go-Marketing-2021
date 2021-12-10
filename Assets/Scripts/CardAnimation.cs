@@ -146,7 +146,7 @@ public class CardAnimation : MonoBehaviour
             int r = UnityEngine.Random.Range(t, youreTheBossFront.Length);
             youreTheBossFront[t] = youreTheBossFront[r];
             youreTheBossFront[r] = tmp;
-        }
+        }/*
         //did you know blue
         for (int t = 0; t < didYouKnowCardFrontBlue.Length; t++)
         {
@@ -155,6 +155,7 @@ public class CardAnimation : MonoBehaviour
             didYouKnowCardFrontBlue[t] = didYouKnowCardFrontBlue[r];
             didYouKnowCardFrontBlue[r] = tmp;
         }
+        */
         //did you know green
         for (int t = 0; t < didYouKnowCardFrontGreen.Length; t++)
         {
@@ -453,9 +454,9 @@ public class CardAnimation : MonoBehaviour
             case 11:
             case 12:
             case 13:
-            case 14:
+            //case 14:
                 Sprite f = cardFront.GetComponent<Image>().sprite;
-                if (buttonPressed == 14 && (f == youreTheBossFrontIdentity[0] || f == youreTheBossFrontIdentity[3] || f == youreTheBossFrontIdentity[5] || f == youreTheBossFrontIdentity[6])) { }
+                if (buttonPressed == 13 && (f == youreTheBossFrontIdentity[0] || f == youreTheBossFrontIdentity[3] || f == youreTheBossFrontIdentity[5] || f == youreTheBossFrontIdentity[6])) { }
                 else
                 {
                     TokenAnimation.instance.isBoss = true;
@@ -483,7 +484,7 @@ public class CardAnimation : MonoBehaviour
             switch (val)
             {
                 case 1:
-                    bossColor = 6;
+                    bossColor = 1;
                     break;
                 case 2:
                     bossColor = 2;
@@ -495,9 +496,6 @@ public class CardAnimation : MonoBehaviour
                     bossColor = 5;
                     break;
                 case 5:
-                    bossColor = 1;
-                    break;
-                case 6:
                     break;
                 default:
                     break;
@@ -508,7 +506,7 @@ public class CardAnimation : MonoBehaviour
             switch (val)
             {
                 case 1:
-                    bossColor = 6;
+                    bossColor = 3;
                     break;
                 case 2:
                     bossColor = 2;
@@ -521,9 +519,6 @@ public class CardAnimation : MonoBehaviour
                     break;
                 case 5:
                     bossColor = 1;
-                    break;
-                case 6:
-                    bossColor = 3;
                     break;
                 default:
                     break;
@@ -534,7 +529,7 @@ public class CardAnimation : MonoBehaviour
             switch (val)
             {
                 case 1:
-                    bossColor = 6;
+                    bossColor = 3;
                     break;
                 case 2:
                     bossColor = 2;
@@ -547,9 +542,6 @@ public class CardAnimation : MonoBehaviour
                     break;
                 case 5:
                     bossColor = 1;
-                    break;
-                case 6:
-                    bossColor = 3;
                     break;
                 default:
                     break;
@@ -560,7 +552,7 @@ public class CardAnimation : MonoBehaviour
             switch (val)
             {
                 case 1:
-                    bossColor = 6;
+                    bossColor = 1;
                     break;
                 case 2:
                     bossColor = 5;
@@ -572,9 +564,6 @@ public class CardAnimation : MonoBehaviour
                     bossColor = 3;
                     break;
                 case 5:
-                    bossColor = 1;
-                    break;
-                case 6:
                     break;
                 default:
                     break;
@@ -585,7 +574,7 @@ public class CardAnimation : MonoBehaviour
             switch (val)
             {
                 case 1:
-                    bossColor = 6;
+                    bossColor = 3;
                     break;
                 case 2:
                     bossColor = 2;
@@ -598,9 +587,6 @@ public class CardAnimation : MonoBehaviour
                     break;
                 case 5:
                     bossColor = 1;
-                    break;
-                case 6:
-                    bossColor = 3;
                     break;
                 default:
                     break;
@@ -612,7 +598,7 @@ public class CardAnimation : MonoBehaviour
             switch (val)
             {
                 case 1:
-                    bossColor = 6;
+                    bossColor = 1;
                     break;
                 case 2:
                     bossColor = 5;
@@ -624,9 +610,6 @@ public class CardAnimation : MonoBehaviour
                     bossColor = 3;
                     break;
                 case 5:
-                    bossColor = 1;
-                    break;
-                case 6:
                     break;
                 default:
                     break;
@@ -637,7 +620,7 @@ public class CardAnimation : MonoBehaviour
             switch (val)
             {
                 case 1:
-                    bossColor = 6;
+                    bossColor = 1;
                     break;
                 case 2:
                     bossColor = 5;
@@ -648,10 +631,7 @@ public class CardAnimation : MonoBehaviour
                 case 4:
                     bossColor = 3;
                     break;
-                case 5:
-                    bossColor = 1;
-                    break;
-                case 6:
+                case 5:    
                     break;
                 default:
                     break;
@@ -662,7 +642,7 @@ public class CardAnimation : MonoBehaviour
             switch (val)
             {
                 case 1:
-                    bossColor = 6;
+                    bossColor = 3;
                     break;
                 case 2:
                     bossColor = 2;
@@ -675,9 +655,6 @@ public class CardAnimation : MonoBehaviour
                     break;
                 case 5:
                     bossColor = 1;
-                    break;
-                case 6:
-                    bossColor = 3;
                     break;
                 default:
                     break;
@@ -820,7 +797,7 @@ public class CardAnimation : MonoBehaviour
                 StartCoroutine("grayBlurFadeIn");
                 FindObjectOfType<AudioManager>().Play("Did You Know");
                 setNameAndSprite();
-                break;
+                break;/*
             case 9:
                 cardBack.GetComponent<Image>().sprite = didYouKnowCardBackBlue;
                 cardFront.GetComponent<Image>().sprite = didYouKnowCardFrontBlue[currentDidYouKnowBlueNumber];
@@ -838,6 +815,7 @@ public class CardAnimation : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Did You Know");
                 setNameAndSprite();
                 break;
+                */
             case 10:
                 // First Player Done
                 cardBack.GetComponent<Image>().sprite = doneBackTall;
