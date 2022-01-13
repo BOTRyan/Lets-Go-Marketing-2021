@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using System.Runtime.InteropServices;
 
 public class CardAnimation : MonoBehaviour
 {
@@ -17,6 +18,12 @@ public class CardAnimation : MonoBehaviour
     }
 
     #endregion
+
+    [DllImport("__Internal")]
+    public static extern void AddElement();
+
+    [DllImport("__Internal")]
+    public static extern void RemoveElement();
 
     public Animator CardAnimator;
     public Animator SettingsAnimator;
@@ -36,9 +43,9 @@ public class CardAnimation : MonoBehaviour
 
     public GameObject cardBack;
     public GameObject cardFront;
-    public TMPro.TMP_InputField emailInput;
+    //public TMPro.TMP_InputField emailInput;
     public GameObject submitButton;
-    public GameObject editButton;
+    //public GameObject editButton;
     public GameObject careerButtons;
     public GameObject didYouButtons;
     public GameObject youreTheButtons;
@@ -211,16 +218,24 @@ public class CardAnimation : MonoBehaviour
         }
         shiftButtons(GameManager.instance.currPlayers);
     }
-
+    
     public void SubmitEmail()
     {
+        /*
         GameManager.instance.players[GameManager.instance.currPlayerTurn - 1].GetComponent<PlayerInfo>().email = emailInput.text;
         emailInput.gameObject.GetComponent<TMPro.TMP_InputField>().interactable = false;
         emailInput.gameObject.GetComponent<TMPro.TMP_InputField>().textComponent.fontStyle = TMPro.FontStyles.Italic;
         submitButton.gameObject.SetActive(false);
         editButton.gameObject.SetActive(true);
-    }
+        */
 
+        AddElement();
+#if !UNITY_EDITOR && UNITY_WEBGL
+        // disable WebGLInput.captureAllKeyboardInput so elements in web page can handle keabord inputs
+        WebGLInput.captureAllKeyboardInput = false;
+#endif
+    }
+    /*
     public void editEmail()
     {
         emailInput.gameObject.GetComponent<TMPro.TMP_InputField>().interactable = true;
@@ -228,6 +243,7 @@ public class CardAnimation : MonoBehaviour
         submitButton.gameObject.SetActive(true);
         editButton.gameObject.SetActive(false);
     }
+    */
 
     public void CardDown()
     {
@@ -250,15 +266,21 @@ public class CardAnimation : MonoBehaviour
         p6hasTakenToken = true;
         cardAvatar.SetActive(false);
         youreTheBossPlayerName.SetActive(false);
-        emailInput.gameObject.GetComponent<TMPro.TMP_InputField>().interactable = true;
-        emailInput.gameObject.GetComponent<TMPro.TMP_InputField>().textComponent.fontStyle = TMPro.FontStyles.Normal;
-        emailInput.text = "yourname@email.com";
-        emailInput.gameObject.SetActive(false);
-        editButton.gameObject.SetActive(false);
+        //emailInput.gameObject.GetComponent<TMPro.TMP_InputField>().interactable = true;
+        //emailInput.gameObject.GetComponent<TMPro.TMP_InputField>().textComponent.fontStyle = TMPro.FontStyles.Normal;
+        //emailInput.text = "yourname@email.com";
+        //emailInput.gameObject.SetActive(false);
+        //editButton.gameObject.SetActive(false);
         submitButton.gameObject.SetActive(false);
         tShirt.SetActive(false);
         showNameOnce = true;
-        emailInput.text = "yourname@email.com";
+
+#if !UNITY_EDITOR && UNITY_WEBGL
+        // disable WebGLInput.captureAllKeyboardInput so elements in web page can handle keabord inputs
+        WebGLInput.captureAllKeyboardInput = true;
+#endif
+
+        //emailInput.text = "yourname@email.com";
         if (GameManager.instance.playersDone >= GameManager.instance.currPlayers && SceneManager.GetActiveScene().buildIndex == 3)
         {
             FindObjectOfType<AudioManager>().Stop("Walk");
@@ -820,10 +842,10 @@ public class CardAnimation : MonoBehaviour
                 // First Player Done
                 cardBack.GetComponent<Image>().sprite = doneBackTall;
                 cardFront.GetComponent<Image>().sprite = firstPlayerDone;
-                emailInput.transform.localPosition = new Vector3(-7.9f, -15.2f, 0);
-                submitButton.transform.localPosition = new Vector3(19.1f, -13.6f, 0);
-                editButton.transform.localPosition = new Vector3(19.2f, -13.6f, 0);
-                emailInput.gameObject.SetActive(true);
+                //emailInput.transform.localPosition = new Vector3(-7.9f, -15.2f, 0);
+                //submitButton.transform.localPosition = new Vector3(19.1f, -13.6f, 0);
+                //editButton.transform.localPosition = new Vector3(19.2f, -13.6f, 0);
+                //emailInput.gameObject.SetActive(true);
                 submitButton.gameObject.SetActive(true);
                 blur.gameObject.SetActive(true);
                 rainbowBlur.gameObject.SetActive(true);
@@ -834,10 +856,10 @@ public class CardAnimation : MonoBehaviour
                 // Other Players Done
                 cardBack.GetComponent<Image>().sprite = doneBack;
                 cardFront.GetComponent<Image>().sprite = otherPlayersDone;
-                emailInput.transform.localPosition = new Vector3(-8.6f, -13.8f, 0);
-                submitButton.transform.localPosition = new Vector3(18.4f, -12.2f, 0);
-                editButton.transform.localPosition = new Vector3(18.4f, -12.2f, 0);
-                emailInput.gameObject.SetActive(true);
+                //emailInput.transform.localPosition = new Vector3(-8.6f, -13.8f, 0);
+                //submitButton.transform.localPosition = new Vector3(18.4f, -12.2f, 0);
+                //editButton.transform.localPosition = new Vector3(18.4f, -12.2f, 0);
+                //emailInput.gameObject.SetActive(true);
                 submitButton.gameObject.SetActive(true);
                 blur.gameObject.SetActive(true);
                 rainbowBlur.gameObject.SetActive(true);
@@ -848,10 +870,10 @@ public class CardAnimation : MonoBehaviour
                 // All Players Done
                 cardBack.GetComponent<Image>().sprite = doneBack;
                 cardFront.GetComponent<Image>().sprite = allPlayersDone;
-                emailInput.transform.localPosition = new Vector3(-8, -6, 0);
-                submitButton.transform.localPosition = new Vector3(19, -4.4f, 0);
-                editButton.transform.localPosition = new Vector3(19, -4.4f, 0);
-                emailInput.gameObject.SetActive(true);
+                //emailInput.transform.localPosition = new Vector3(-8, -6, 0);
+                //submitButton.transform.localPosition = new Vector3(19, -4.4f, 0);
+                //editButton.transform.localPosition = new Vector3(19, -4.4f, 0);
+                //emailInput.gameObject.SetActive(true);
                 submitButton.gameObject.SetActive(true);
                 blur.gameObject.SetActive(true);
                 rainbowBlur.gameObject.SetActive(true);

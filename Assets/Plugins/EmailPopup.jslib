@@ -193,17 +193,17 @@ mergeInto(LibraryManager.library, {
             _newDiv.appendChild(emailTest);
             
             // Close Popup Button
-            /*
+            
             const closeButton = document.createElement("button");
             closeButton.setAttribute("type", "button");
             closeButton.setAttribute("id", "close");
-            closeButton.addEventListener("onmousedown", _RemoveElement);
+            closeButton.addEventListener("click", _RemoveElement);
 
             const closeText = document.createTextNode("Nevermind");
             closeButton.appendChild(closeText);
 
             _newDiv.appendChild(closeButton);
-            */
+            
 
             document.body.appendChild(_newDiv);
 
