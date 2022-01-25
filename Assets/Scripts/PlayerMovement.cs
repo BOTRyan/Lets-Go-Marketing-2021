@@ -650,7 +650,7 @@ public class PlayerMovement : MonoBehaviour
             Spinner.instance.Rollednumber.text = "";
         }
         checkPlayerOffset();
-        if (currPos >= 44) hasFinished = true;
+        if (currPos >= finalPos) hasFinished = true;
         GameManager.instance.currPlayerTurn++;
     }
 
