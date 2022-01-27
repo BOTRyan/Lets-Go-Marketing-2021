@@ -44,28 +44,30 @@ public class RandomMenuScenes : MonoBehaviour
 
     void randomize()
     {
-        int randImg = Mathf.FloorToInt(Random.Range(0, 6));
+        int randImg = Mathf.FloorToInt(Random.Range(0, 5));
         while (randImg == imgArray.IndexOf(GetComponent<Image>().sprite))
         {
             randImg = Mathf.FloorToInt(Random.Range(0, 6));
-
         }
+
+        Debug.Log(randImg);
         GetComponent<Image>().sprite = imgArray[randImg];
     }
 
     IEnumerator ImgFade()
     {
-        for (float a = 1; a > -1f; a -= .02f)
+        for (float a = 1; a > -1f; a -= .02f) // so while a is greater than -1 (a starts at 1), a is subtracted by .02.
         {
+            //Debug.Log(a); // so a goes from 1 to -1, which adds up. it only changes when it fades, this also adds up
             Color fade = GetComponent<Image>().color;
-            fade.a = (a >= 0) ? a : -a;
-            GetComponent<Image>().color = fade;
-            if (a <= 0)
+            fade.a = (a >= 0) ? a : -a; // is is opacity value, if loop a is greater or = to 0, fade.a is pos, otherwise, a is neg. OH but this isn't the opacity from fade.a, this is the loop a
+            GetComponent<Image>().color = fade; // this didn't seem to change anything getting rid of it
+            if (a <= 0) // if loop # is smaller or less than 0
             {
-                if (!hasSwapped)
+                if (!hasSwapped) // if haven't swapped
                 {
-                    randomize();
-                    hasSwapped = true;
+                    randomize(); // what does this mean
+                    hasSwapped = true; // is swapped
                 }
             }
             yield return new WaitForFixedUpdate();

@@ -600,7 +600,11 @@ MonoBehaviour:
   musicButt: {fileID: 876822785}
   SFXButt: {fileID: 722399773}
   QuitButt: {fileID: 0}
+  areYouSure: {fileID: 0}
+  quitBlur: {fileID: 0}
   buttonsHidden: 0
+  quitIsOut: 0
+  googleScript: {fileID: 0}
 --- !u!1 &876822781
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,13 +904,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00fb0e9846b61124d85e636bff9d4ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  advertScene: {fileID: 21300000, guid: 65e868b567312c44aaa8efe6e5be5c44, type: 3}
-  businessScene: {fileID: 21300000, guid: 3059da011bd4a934180777a7335326a1, type: 3}
-  designScene: {fileID: 21300000, guid: 2910798f4800d5d4dad80edd461f88ae, type: 3}
-  mediaManagementScene: {fileID: 21300000, guid: b9f40198ed338a84e9c1f47e0821daed,
+  businessScene: {fileID: 21300000, guid: ce5e1be59485b2440ada81b0acdca337, type: 3}
+  designScene: {fileID: 21300000, guid: f78a76d78ee0ffd46aeb54aef45da5a3, type: 3}
+  mediaManagementScene: {fileID: 21300000, guid: b278f6227260271459998f5484021b7d,
     type: 3}
-  marketingScene: {fileID: 21300000, guid: 08b27f6695f56e540be0599f073540f1, type: 3}
-  PRScene: {fileID: 21300000, guid: f415d452d00e30742abc5751629181d7, type: 3}
+  marketingScene: {fileID: 21300000, guid: 2749ddccc9bd22542841afad7aef327c, type: 3}
+  PRScene: {fileID: 21300000, guid: 12a16e51ae5177e41a78ea4560787407, type: 3}
   disclaimer: {fileID: 8784307}
   blur: {fileID: 1630026046}
 --- !u!114 &1082817137
@@ -928,7 +931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2910798f4800d5d4dad80edd461f88ae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f78a76d78ee0ffd46aeb54aef45da5a3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
