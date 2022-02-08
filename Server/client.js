@@ -34,14 +34,15 @@ exports.Client = class Client {
         switch(packetIdentifier) {
             case "JOIN":
                 if(this.buffer.length < 8) return;
+                console.log(this.buffer);
+                this.room = this.buffer.slice(4, 8).toString();
+                let responseID = this.server.joinResponse(this);
 
-                let responseID = this.server.joinResponse(this.client);
-                if(responseID <= 2) this.room = this.buffer.slice(4, 4).toString();
-                
+                console.log(responseID);
 
-                const packet = PacketBuilder.join(responseID);
+                const packetJ = PacketBuilder.join(responseID, this.room);
 
-                this.sendPacket(packet);
+                this.sendPacket(packetJ);
                 break;
             case "REDY":
                 if(this.buffer.length < 5) return;
@@ -58,15 +59,15 @@ exports.Client = class Client {
                 if(responseType == 1) this.username = usernameInput;
                 if(this.server.checkAvatars(avatarInput) == 0) this.avatar = avatarInput;
 
-                const packet = PacketBuilder.ready(responseType, this.server);
+                const packetR = PacketBuilder.ready(responseType, this.server);
 
-                this.sendPacket(packet);
+                this.sendPacket(packetR);
 
                 break;
             case "STRT":
                 this.server.lockedRooms.push(this.room);
 
-                const packet = PacketBuilder.update(this.server.game);
+                const packetS = PacketBuilder.update(this.server.game);
                 break;
             case "SPIN":
                 break;

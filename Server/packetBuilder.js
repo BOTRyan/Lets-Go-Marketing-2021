@@ -5,8 +5,8 @@ exports.PacketBuilder = {
         packet.write("JOIN", 0);
         packet.writeUInt8(responseID, 4);
 
-        if(responseID == 1) packet.write(room);
-        else packet.write("NULL");
+        if(responseID == 1) packet.write(room, 5);
+        else packet.write("NULL", 5);
 
         return packet;
     },

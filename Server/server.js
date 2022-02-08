@@ -2,14 +2,16 @@ const Client = require("./client.js").Client;
 const PacketBuilder = require("./packetBuilder.js").PacketBuilder;
 
 exports.Server = {
-    port: 8080,
+    port: 1111,
     clients: [],
     rooms: [],
     maxPlayers: 7,
     start(game) {
         this.game = game;
 
-        this.socket = require("net").createServer({}, c => this.onClientConnect(c))
+        this.socket = require("net").createServer({}, c => this.onClientConnect(c));
+        this.socket.on("error", e => this.onError(e));
+        this.socket.listen({port: this.port}, () => this.onStartListen());
     },
     onClientConnect(socket) {
         const client = new Client(socket, this);
@@ -40,14 +42,16 @@ exports.Server = {
         }
     },
     joinResponse(client) {
-        if(!this.rooms.includes(client.room)) return 4;
+        console.log(client.room);
+        if(!this.rooms.includes(client.room) && client.room != "HOST") return 4;
         
         let count = 0;
 
         for(const i in this.clients) {
-            if(this.clients[i].room == client.room) count++;
+            if(this.clients[i].room == client.room && this.clients[i] != client) count++;
         }
         if(count == 0){ 
+            
             this.createRoom(client);
             client.isHost = true;
             return 1;
@@ -92,7 +96,7 @@ exports.Server = {
             result += pool.charAt(Math.floor(Math.random() * pool.length));
         }
 
-        while(this.rooms.includes(result)) {
+        while(this.rooms.includes(result) || result == "HOST") {
             result = "";
             for(let i = 0; i < 4; i++) {
                 result += pool.charAt(Math.floor(Math.random() * pool.length));

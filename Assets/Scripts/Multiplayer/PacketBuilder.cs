@@ -5,13 +5,12 @@ using UnityEngine;
 public class PacketBuilder
 {
 
-    public static Buffer Join(string room = "NULL")
+    public static Buffer Join(string room = "HOST")
     {
         Buffer packet = Buffer.Alloc(8);
 
         packet.WriteString("JOIN");
         packet.WriteString(room, 4);
-
         return packet;
     }
 

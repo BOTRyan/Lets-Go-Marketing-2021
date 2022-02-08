@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class ClientTCP : MonoBehaviour
 {
     public static ClientTCP singleton;
-    private TcpClient socket;
+    private TcpClient socket = new TcpClient();
     private Buffer buffer = Buffer.Alloc(0);
 
     private string serverHost = "127.0.0.1";
@@ -19,6 +19,8 @@ public class ClientTCP : MonoBehaviour
     public GameObject roomPanel, joinPanel;
     public bool isHost = false;
     public string connectedRoom, attemptedRoom;
+
+    public TMP_Text roomName;
 
     private void Awake()
     {
@@ -56,6 +58,7 @@ public class ClientTCP : MonoBehaviour
     public async void SendPacketToServer(Buffer packet)
     {
         if (!socket.Connected) return;
+        print(packet);
 
         await socket.GetStream().WriteAsync(packet.Bytes, 0, packet.Bytes.Length);
     }
@@ -77,11 +80,14 @@ public class ClientTCP : MonoBehaviour
                 {
                     isHost = true;
                     connectedRoom = buffer.ReadString(5, 4);
+                    roomName.text = "ROOM: " + connectedRoom;
+                    SwapScreens("room");
                     //SceneManager.LoadScene("mainMenu");
                 }
                 if(response == 2)
                 {
                     connectedRoom = attemptedRoom;
+                    SwapScreens("room");
                     //SceneManager.LoadScene("lobbyScene");
                 }
                 else
@@ -116,7 +122,7 @@ public class ClientTCP : MonoBehaviour
                 break;
 
             default:
-                print("Unknown identifier");
+                print("Unknown identifier: " + id);
                 buffer.Clear();
                 break;
         }
@@ -150,9 +156,9 @@ public class ClientTCP : MonoBehaviour
     public void OnConnectRoom()
     {
         TryConnect(serverHost, port);
-        string room = roomInput.text;
-        attemptedRoom = room;
-        Buffer packet = PacketBuilder.Join(room);
+        attemptedRoom = roomInput.text;
+        
+        Buffer packet = PacketBuilder.Join(attemptedRoom);
         SendPacketToServer(packet);
     }
 
@@ -170,7 +176,7 @@ public class ClientTCP : MonoBehaviour
             joinPanel.SetActive(true);
             roomPanel.SetActive(false);
         }
-        else if(newScreen == "back")
+        else if(newScreen == "room")
         {
             joinPanel.SetActive(false);
             roomPanel.SetActive(true);

@@ -17,4 +17,4 @@ const Game = {
 
 }
 
-server.start(game);
+server.start(Game);
