@@ -18,7 +18,8 @@ exports.Server = {
         this.clients.push(client);
     },
     onClientDisconnect(client) {
-
+        // If the client is a host, shut down the room
+        // If the client is a player, remove them from the room
     },
     onError(e) {
         console.log("ERROR with listener: " + e);
@@ -42,7 +43,7 @@ exports.Server = {
         }
     },
     joinResponse(client) {
-        console.log(client.room);
+        
         if(!this.rooms.includes(client.room) && client.room != "HOST") return 4;
         
         let count = 0;
@@ -50,13 +51,15 @@ exports.Server = {
         for(const i in this.clients) {
             if(this.clients[i].room == client.room && this.clients[i] != client) count++;
         }
-        if(count == 0){ 
-            
+        if (count > this.maxPlayers) return 3;
+        console.log(client.room);
+        if(client.room == "HOST"){ 
             this.createRoom(client);
             client.isHost = true;
             return 1;
         }
-        else if (count > this.maxPlayers) return 3;
+        
+        
 
         return 2;
 

@@ -87,6 +87,7 @@ public class ClientTCP : MonoBehaviour
                 if(response == 2)
                 {
                     connectedRoom = attemptedRoom;
+                    roomName.text = "JOINED: " + connectedRoom;
                     SwapScreens("room");
                     //SceneManager.LoadScene("lobbyScene");
                 }

@@ -34,7 +34,7 @@ that sent it, and update the other players of taken avatars
     O   L   Datatype    Desc
     ---------------------------------------------------------
     0   4   ascii       packet type: "REDY"
-    4   1   uint8	    username response
+    4   1   uint8	username response
     5	6   uint8 x6	current chosen avatars
     
     Accepted: 1
