@@ -16,11 +16,13 @@ public class ClientTCP : MonoBehaviour
     private int port = 1111;
 
     public TMP_InputField roomInput;
-    public GameObject roomPanel, joinPanel;
+    public GameObject roomPanel, joinPanel, hostPanel, playerPanel, errorPanel;
     public bool isHost = false;
     public string connectedRoom, attemptedRoom;
 
-    public TMP_Text roomName;
+    public TMP_Text roomName, responseFeedback, errorNum;
+
+    // i need by next week to also get stuff on the player page, 6 buttons and an input box
 
     private void Awake()
     {
@@ -80,20 +82,29 @@ public class ClientTCP : MonoBehaviour
                 {
                     isHost = true;
                     connectedRoom = buffer.ReadString(5, 4);
-                    roomName.text = "ROOM: " + connectedRoom;
+                    roomName.text = "Room Code: " + connectedRoom;
                     SwapScreens("room");
-                    //SceneManager.LoadScene("mainMenu");
                 }
-                if(response == 2)
+                else if(response == 2)
                 {
                     connectedRoom = attemptedRoom;
-                    roomName.text = "JOINED: " + connectedRoom;
-                    SwapScreens("room");
-                    //SceneManager.LoadScene("lobbyScene");
+                    SwapScreens("join");
+                }
+                else if(response == 3)
+                {
+                    ServerError("This room is full", response);
+                }
+                else if(response == 4)
+                {                
+                    ServerError("Unable to find room", response);
+                }
+                else if(response == 5)
+                {
+                    ServerError("This game has already started", response);
                 }
                 else
                 {
-                    // Send error message based on denied response
+=                    ServerError("Unknown Error", response);
                 }
 
                 break;
@@ -124,9 +135,9 @@ public class ClientTCP : MonoBehaviour
 
             default:
                 print("Unknown identifier: " + id);
-                buffer.Clear();
                 break;
         }
+        buffer.Clear();
     }
 
     public async void TryConnect(string host, int port)
@@ -170,17 +181,24 @@ public class ClientTCP : MonoBehaviour
         SendPacketToServer(packet);
     }
 
+    private void ServerError(string feedbackTxt, int errNum)
+    {
+        errorPanel.SetActive(true);
+        responseFeedback.text = feedbackTxt;
+        errorNum.text = "Error Number: " + errNum;
+    }
+
     private void SwapScreens(string newScreen)
     {
         if(newScreen == "join")
         {
-            joinPanel.SetActive(true);
-            roomPanel.SetActive(false);
+            joinPanel.SetActive(false);
+            playerPanel.SetActive(true);
         }
         else if(newScreen == "room")
         {
             joinPanel.SetActive(false);
-            roomPanel.SetActive(true);
+            hostPanel.SetActive(true);
         }
     }
 }

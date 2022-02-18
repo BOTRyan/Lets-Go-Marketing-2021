@@ -39,6 +39,7 @@ exports.Client = class Client {
                 let responseID = this.server.joinResponse(this);
 
                 console.log(responseID);
+                this.buffer = this.buffer.slice(8);
 
                 const packetJ = PacketBuilder.join(responseID, this.room);
 

@@ -4,7 +4,7 @@ const PacketBuilder = require("./packetBuilder.js").PacketBuilder;
 exports.Server = {
     port: 1111,
     clients: [],
-    rooms: [],
+    rooms: ["ABCD"],
     maxPlayers: 7,
     start(game) {
         this.game = game;
