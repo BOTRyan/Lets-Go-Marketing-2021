@@ -30,7 +30,7 @@ exports.Server = {
     reachedMaxPlayers() {
         return (this.clients.length >= this.maxPlayers);
     },
-    broadcastPacket(packet, room) {
+    broadcastPacketToRoom(packet, room) {
         for(const i in this.clients) {
             if(this.clients[i].room == room) this.clients[i].sendPacket(packet);
         }
@@ -46,23 +46,24 @@ exports.Server = {
         
         if(!this.rooms.includes(client.room) && client.room != "HOST") return 4;
         
-        let count = 0;
-
-        for(const i in this.clients) {
-            if(this.clients[i].room == client.room && this.clients[i] != client) count++;
-        }
-        if (count > this.maxPlayers) return 3;
-        console.log(client.room);
+        
         if(client.room == "HOST"){ 
             this.createRoom(client);
             client.isHost = true;
             return 1;
         }
-        
+        if (this.getPlayersInRoom(client.room) + 1 > this.maxPlayers) return 3;
         
 
         return 2;
 
+    },
+    getPlayersInRoom(room) {
+        let count = 0;
+        for(const i in this.clients) {
+            if(this.clients[i].room == room && !this.clients[i].isHost) count++;
+        }
+        return count;
     },
     usernameResponse(desiredUsername, client) {
         if(desiredUsername.length == 0) return 2;

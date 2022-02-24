@@ -37,13 +37,16 @@ exports.Client = class Client {
                 console.log(this.buffer);
                 this.room = this.buffer.slice(4, 8).toString();
                 let responseID = this.server.joinResponse(this);
-
-                console.log(responseID);
                 this.buffer = this.buffer.slice(8);
 
                 const packetJ = PacketBuilder.join(responseID, this.room);
 
                 this.sendPacket(packetJ);
+
+                if(responseID == 2) {
+                    const packetL = PacketBuilder.lobby(this.server.getPlayersInRoom(this.room));
+                    this.server.sendToHost(this.room, packetL);
+                }
                 break;
             case "REDY":
                 if(this.buffer.length < 5) return;
@@ -60,6 +63,7 @@ exports.Client = class Client {
                 if(responseType == 1) this.username = usernameInput;
                 if(this.server.checkAvatars(avatarInput) == 0) this.avatar = avatarInput;
 
+                this.buffer = this.buffer.slice(6 + lengthOfUsername);
                 const packetR = PacketBuilder.ready(responseType, this.server);
 
                 this.sendPacket(packetR);

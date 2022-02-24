@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ClientTCP : MonoBehaviour
 {
@@ -21,6 +22,16 @@ public class ClientTCP : MonoBehaviour
     public string connectedRoom, attemptedRoom;
 
     public TMP_Text roomName, responseFeedback, errorNum;
+    public TMP_Text playerNum;
+
+    public Sprite[] avatarImages = new Sprite[6];
+    public GameObject[] avatarPositions = new GameObject[6];
+    public GameObject[] avatarButtons = new GameObject[6];
+    public GameObject avatarBase;
+    private List<GameObject> currAvatars = new List<GameObject>();
+
+    private int currAvatarSelection = 0;
+    private string usernameInput;
 
     // i need by next week to also get stuff on the player page, 6 buttons and an input box
 
@@ -78,35 +89,54 @@ public class ClientTCP : MonoBehaviour
 
                 var response = buffer.ReadUInt8(4);
 
-                if(response == 1)
+                if (response == 1)
                 {
                     isHost = true;
                     connectedRoom = buffer.ReadString(5, 4);
                     roomName.text = "Room Code: " + connectedRoom;
                     SwapScreens("room");
                 }
-                else if(response == 2)
+                else if (response == 2)
                 {
                     connectedRoom = attemptedRoom;
                     SwapScreens("join");
                 }
-                else if(response == 3)
+                else if (response == 3)
                 {
                     ServerError("This room is full", response);
                 }
-                else if(response == 4)
-                {                
+                else if (response == 4)
+                {
                     ServerError("Unable to find room", response);
                 }
-                else if(response == 5)
+                else if (response == 5)
                 {
                     ServerError("This game has already started", response);
                 }
                 else
                 {
-=                    ServerError("Unknown Error", response);
+                    ServerError("Unknown Error", response);
                 }
+                
 
+                break;
+            case "LOBY":
+                var numberOfPlayers = buffer.ReadUInt8(4);
+
+                if (isHost)
+                {
+                    playerNum.text = "Players in room: " + numberOfPlayers.ToString();
+
+                    currAvatars.Clear();
+                    for(int i = 0; i < numberOfPlayers; i++)
+                    {
+                        GameObject newAvatar = Instantiate(avatarBase);
+                        // Update things as necessary here
+                        newAvatar.GetComponent<TMP_Text>().text = "Waiting...";
+                        newAvatar.transform.position = avatarPositions[i].transform.position;
+                        currAvatars.Add(newAvatar);
+                    }
+                }
                 break;
             case "REDY":
                 if (buffer.Length < 11) return;
@@ -121,6 +151,16 @@ public class ClientTCP : MonoBehaviour
                 {
                     int thing = buffer.ReadUInt8(offset + i);
                     // Update avatars in lobby scene based on taken avatars
+
+                    if(isHost)
+                    {
+                        if (i < currAvatars.Count - 1) currAvatars[i].GetComponent<Image>().sprite = avatarImages[thing];
+                    }
+                    else
+                    {
+                        if (thing == 1) avatarButtons[i].SetActive(false);
+                        if (thing == 0) avatarButtons[i].SetActive(true);
+                    }
                 }
 
                 break;
@@ -172,6 +212,15 @@ public class ClientTCP : MonoBehaviour
         
         Buffer packet = PacketBuilder.Join(attemptedRoom);
         SendPacketToServer(packet);
+    }
+
+    public void OnChooseAvatar(int selection)
+    {
+
+    }
+    public void OnSubmitPlayer()
+    {
+
     }
 
     public void OnButtonHost()

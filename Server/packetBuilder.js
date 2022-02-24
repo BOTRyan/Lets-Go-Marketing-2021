@@ -10,6 +10,13 @@ exports.PacketBuilder = {
 
         return packet;
     },
+    lobby(numPlayers) {
+        const packet = Buffer.alloc(5);
+        packet.write("LOBY", 0);
+        packet.writeUInt8(numPlayers, 4);
+
+        return packet;
+    },
     ready(usernameResponse, server) {
         const packet = Buffer.alloc(11);
 

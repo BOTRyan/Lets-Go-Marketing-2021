@@ -6,6 +6,14 @@ Information on Server:
 - Current Turn
 - Player Stats
 
+Avatar Numbers:
+1: Red
+2: Yellow
+3: Green
+4: Blue
+5: Purple
+6: Pink
+
 Packets from Server:
 --------------------
 
@@ -28,6 +36,13 @@ not the client is allowed to join.
     4: Could not find room
     5: Game already started
 
+LOBY - When a new player joins a host's lobby, update the host on how many other players are
+in that lobby
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "LOBY"
+    4   1   uint8	current number of players in room (1-6)
+
 REDY - Once the server receives a REDY packet, it'll set the username and avatar of the player
 that sent it, and update the other players of taken avatars
 
@@ -35,7 +50,10 @@ that sent it, and update the other players of taken avatars
     ---------------------------------------------------------
     0   4   ascii       packet type: "REDY"
     4   1   uint8	username response
-    5	6   uint8 x6	current chosen avatars
+
+    
+    5	6   uint8 x6	current chosen avatars (if player)
+    5	6   uint8 x6	each player's avatar (if host)
     
     Accepted: 1
     (denied:)
