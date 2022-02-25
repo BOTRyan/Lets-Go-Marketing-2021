@@ -24,10 +24,13 @@ public class ClientTCP : MonoBehaviour
     public TMP_Text roomName, responseFeedback, errorNum;
     public TMP_Text playerNum;
 
+    public TMP_InputField usernameInputField;
+
     public Sprite[] avatarImages = new Sprite[6];
     public GameObject[] avatarPositions = new GameObject[6];
     public GameObject[] avatarButtons = new GameObject[6];
     public GameObject avatarBase;
+    public GameObject myAvatar;
     private List<GameObject> currAvatars = new List<GameObject>();
 
     private int currAvatarSelection = 0;
@@ -126,43 +129,69 @@ public class ClientTCP : MonoBehaviour
                 if (isHost)
                 {
                     playerNum.text = "Players in room: " + numberOfPlayers.ToString();
-
+                    foreach(GameObject a in currAvatars)
+                    {
+                        Destroy(a);
+                    }
                     currAvatars.Clear();
                     for(int i = 0; i < numberOfPlayers; i++)
                     {
-                        GameObject newAvatar = Instantiate(avatarBase);
-                        // Update things as necessary here
-                        newAvatar.GetComponent<TMP_Text>().text = "Waiting...";
+                        Canvas c = FindObjectOfType<Canvas>();
+                        GameObject newAvatar = Instantiate(avatarBase, c.transform);
+                        newAvatar.GetComponentInChildren<TMP_Text>().text = "Waiting...";
                         newAvatar.transform.position = avatarPositions[i].transform.position;
+                        
                         currAvatars.Add(newAvatar);
                     }
                 }
                 break;
             case "REDY":
-                if (buffer.Length < 11) return;
+                if (buffer.Length < 6) return;
 
-                var userResponse = buffer.ReadUInt8(4);
+                int userResponse = buffer.ReadUInt8(4);
                 if(userResponse > 1)
                 {
                     // Send username error message
                 }
-                int offset = 5;
-                for(int i = 0; i < 6; i++)
+                int avatarResponse = buffer.ReadUInt8(5);
+                if(avatarResponse == 0)
                 {
-                    int thing = buffer.ReadUInt8(offset + i);
-                    // Update avatars in lobby scene based on taken avatars
-
-                    if(isHost)
-                    {
-                        if (i < currAvatars.Count - 1) currAvatars[i].GetComponent<Image>().sprite = avatarImages[thing];
-                    }
-                    else
-                    {
-                        if (thing == 1) avatarButtons[i].SetActive(false);
-                        if (thing == 0) avatarButtons[i].SetActive(true);
-                    }
+                    currAvatarSelection = 0;
                 }
 
+                if(userResponse == 1 && avatarResponse == 1)
+                {
+                    UpdatePersonalAvatar(usernameInput, currAvatarSelection);
+                }
+
+                break;
+            case "HUPD":
+                
+                if (!isHost) return;
+                if (buffer.Length < 7) return;
+                int lengthOfUsername = buffer.ReadUInt8(6);
+                
+                if (buffer.Length < 7 + lengthOfUsername) return;
+
+                int slot = buffer.ReadUInt8(4);
+                int avatar = buffer.ReadUInt8(5);
+                string username = buffer.ReadString(7, lengthOfUsername);
+                
+
+                currAvatars[slot-1].GetComponentInChildren<Image>().sprite = avatarImages[avatar - 1];
+                currAvatars[slot-1].GetComponentInChildren<TMP_Text>().text = username;
+
+
+                break;
+            case "PUPD":
+                if (buffer.Length < 10) return;
+                int offset = 4;
+                for(int i = 0; i < 6; i++)
+                {
+                    int avatarCheck = buffer.ReadUInt8(offset + i);
+                    if (avatarCheck == 0) avatarButtons[i].SetActive(false);
+                    if (avatarCheck == 1) avatarButtons[i].SetActive(true);
+                }
                 break;
             case "GAME":
                 break;
@@ -178,6 +207,14 @@ public class ClientTCP : MonoBehaviour
                 break;
         }
         buffer.Clear();
+    }
+
+    private void UpdatePersonalAvatar(string name, int avatarNum)
+    {
+        myAvatar.GetComponentInChildren<Image>().sprite = avatarImages[avatarNum];
+        myAvatar.GetComponentInChildren<TMP_Text>().text = name;
+
+        myAvatar.SetActive(true);
     }
 
     public async void TryConnect(string host, int port)
@@ -216,11 +253,16 @@ public class ClientTCP : MonoBehaviour
 
     public void OnChooseAvatar(int selection)
     {
-
+        currAvatarSelection = selection - 1;
+    }
+    public void OnUsernameEndEdit()
+    {
+        usernameInput = usernameInputField.text;
     }
     public void OnSubmitPlayer()
     {
-
+        Buffer packet = PacketBuilder.Ready(usernameInput, currAvatarSelection + 1);
+        SendPacketToServer(packet);
     }
 
     public void OnButtonHost()

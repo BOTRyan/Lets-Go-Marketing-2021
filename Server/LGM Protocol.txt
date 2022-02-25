@@ -43,6 +43,23 @@ in that lobby
     0   4   ascii       packet type: "LOBY"
     4   1   uint8	current number of players in room (1-6)
 
+HUPD - When the server sends back a REDY packet to a player, if it was successful, send an update
+to the server to update that player's avatar and name
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "HUPD"
+    4   1   uint8	player slot to update
+    5 	1   uint8 	chosen avatar
+    6	1   uint8	length of username
+    7	?   ascii 	player's username
+
+PUPD - When the server sends back a REDY packet to a player, if it was successful, send an update
+to the other players in the room updating their available avatars
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "PUPD"
+    4   6   uint8x6	current taken status of each avatar (1 for available, 0 for taken)
+
 REDY - Once the server receives a REDY packet, it'll set the username and avatar of the player
 that sent it, and update the other players of taken avatars
 
@@ -50,10 +67,7 @@ that sent it, and update the other players of taken avatars
     ---------------------------------------------------------
     0   4   ascii       packet type: "REDY"
     4   1   uint8	username response
-
-    
-    5	6   uint8 x6	current chosen avatars (if player)
-    5	6   uint8 x6	each player's avatar (if host)
+    5   1   uint8	avatar response (1 for available, 0 for taken)
     
     Accepted: 1
     (denied:)
@@ -113,8 +127,8 @@ REDY - once the user's joined, they will put in a username and a choice of avata
     ---------------------------------------------------------
     0   4   ascii       packet type: "REDY"
     4   1   uint8	    length of username
-    5   ?   ascii	    desired username
-    ?   1   uint8 	    desired avatar
+    5   1   uint8	    desired avatar
+    6   ?   ascii 	    desired username
 
 STRT - once all players are ready, tell the server to start the game
 

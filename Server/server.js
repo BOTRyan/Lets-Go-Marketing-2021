@@ -30,9 +30,11 @@ exports.Server = {
     reachedMaxPlayers() {
         return (this.clients.length >= this.maxPlayers);
     },
-    broadcastPacketToRoom(packet, room) {
+    broadcastPacketToRoom(packet, room, sendToHost = false) {
         for(const i in this.clients) {
-            if(this.clients[i].room == room) this.clients[i].sendPacket(packet);
+            if(this.clients[i].room == room) {
+                if(!sendToHost && !this.clients[i].isHost) this.clients[i].sendPacket(packet);
+            }
         }
     },
     sendToHost(room, packet) {
@@ -75,7 +77,7 @@ exports.Server = {
         let isUsernameTaken = false;
         this.clients.forEach(c=> {
             if(c.room != client.room) return;
-            if(c.username == desiredUsername) isUsernameTaken = true;
+            if(c.username == desiredUsername && c != client) isUsernameTaken = true;
         });
         if(isUsernameTaken) return 5;
         
@@ -83,15 +85,16 @@ exports.Server = {
 
         if(regex2.test(desiredUsername)) return 6;
 
-        
+        return 1;
     },
-    checkAvatar(num) {
+    checkAvatar(num, room) {
         for(const i in this.clients) {
-            if(this.clients[i].avatar == num) return 1;
+            if(this.clients[i].avatar == num && this.clients[i].room == room) return 0;
         }
 
-        return 0;
+        return 1;
     },
+
     createRoom(host) {
         let result = "";
         let pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

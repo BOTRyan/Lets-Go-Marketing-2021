@@ -17,14 +17,34 @@ exports.PacketBuilder = {
 
         return packet;
     },
-    ready(usernameResponse, server) {
-        const packet = Buffer.alloc(11);
+    hostLobbyUpdate(playerSlot, avatarNum, username) {
+        let userLength = username.length;
+        const packet = Buffer.alloc(7 + userLength);
+        packet.write("HUPD", 0);
+        packet.writeUInt8(playerSlot, 4);
+        packet.writeUInt8(avatarNum, 5);
+        packet.writeUInt8(userLength, 6);
+        packet.write(username, 7);
+
+        return packet;
+    },
+    playerLobbyUpdate(availableArray) {
+        const packet = Buffer.alloc(10);
+
+        packet.write("PUPD", 0);
+        for(let i = 0; i < availableArray.length; i++) {
+            packet.writeUInt8(availableArray[i], i+4);
+        }
+
+        return packet;
+    },
+    ready(usernameResponse, avatarResponse) {
+        const packet = Buffer.alloc(6);
 
         packet.write("REDY", 0);
         packet.writeUInt8(usernameResponse, 4);
-        for(let i = 0; i < 6; i++) {
-            packet.writeUInt8(server.checkAvatars(i), 5 + i);
-        }
+        packet.writeUInt8(avatarResponse, 5);
+
 
         return packet;
     },

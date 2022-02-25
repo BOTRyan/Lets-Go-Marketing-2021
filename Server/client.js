@@ -34,17 +34,19 @@ exports.Client = class Client {
         switch(packetIdentifier) {
             case "JOIN":
                 if(this.buffer.length < 8) return;
-                console.log(this.buffer);
                 this.room = this.buffer.slice(4, 8).toString();
                 let responseID = this.server.joinResponse(this);
                 this.buffer = this.buffer.slice(8);
+
+                
 
                 const packetJ = PacketBuilder.join(responseID, this.room);
 
                 this.sendPacket(packetJ);
 
                 if(responseID == 2) {
-                    const packetL = PacketBuilder.lobby(this.server.getPlayersInRoom(this.room));
+                    this.turnNum = this.server.getPlayersInRoom(this.room);
+                    const packetL = PacketBuilder.lobby(this.turnNum);
                     this.server.sendToHost(this.room, packetL);
                 }
                 break;
@@ -55,16 +57,34 @@ exports.Client = class Client {
 
                 if(this.buffer.length < 5 + usernameLength) return;
 
-                const usernameInput = this.buffer.slice(5, 5 + lengthOfUsername).toString();
-                const avatarInput = this.buffer.slice(5 + lengthOfUsername, 1);
+               
+                const avatarInput = this.buffer.readUInt8(5);
+                const usernameInput = this.buffer.slice(6, 6 + usernameLength).toString();
 
                 let responseType = this.server.usernameResponse(usernameInput, this);
+                let avatarResponse = this.server.checkAvatar(avatarInput, this.room);
 
-                if(responseType == 1) this.username = usernameInput;
-                if(this.server.checkAvatars(avatarInput) == 0) this.avatar = avatarInput;
+                if(responseType == 1 && avatarResponse == 1){
+                    this.username = usernameInput;
+                    this.avatar = avatarInput;
 
-                this.buffer = this.buffer.slice(6 + lengthOfUsername);
-                const packetR = PacketBuilder.ready(responseType, this.server);
+                    const packetH = PacketBuilder.hostLobbyUpdate(this.turnNum, this.avatar, this.username);
+                    this.server.sendToHost(this.room, packetH);
+
+                    let avatars = [];
+                    for(let i = 0; i < 6; i++) {
+                        avatars[i] = this.server.checkAvatar(i + 1, this.room);
+                    }
+
+                    const packetP = PacketBuilder.playerLobbyUpdate(avatars);
+                    this.server.broadcastPacketToRoom(packetP, this.room);
+                } 
+                
+
+                
+
+                this.buffer = this.buffer.slice(6 + usernameLength);
+                const packetR = PacketBuilder.ready(responseType, avatarResponse);
 
                 this.sendPacket(packetR);
 

@@ -21,8 +21,8 @@ public class PacketBuilder
 
         packet.WriteString("REDY");
         packet.WriteUInt8((byte)name.Length, 4);
-        packet.WriteString(name, 5);
-        packet.WriteUInt8((byte)avatar, 5 + name.Length);
+        packet.WriteUInt8((byte)avatar, 5);
+        packet.WriteString(name, 6);
 
         return packet;
     }
