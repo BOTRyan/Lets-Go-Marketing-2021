@@ -32,6 +32,7 @@ public class ClientTCP : MonoBehaviour
     public GameObject avatarBase;
     public GameObject myAvatar;
     private List<GameObject> currAvatars = new List<GameObject>();
+    private Color[] buttonColors = new Color[6] {new Color(1, 0, 0), new Color(1, .968f, 0), new Color(0, 1, 0), new Color(0, .564f, 1), new Color(.75f, 0, 1), new Color(1, .348f, .869f) };
 
     private int currAvatarSelection = 0;
     private string usernameInput;
@@ -189,8 +190,8 @@ public class ClientTCP : MonoBehaviour
                 for(int i = 0; i < 6; i++)
                 {
                     int avatarCheck = buffer.ReadUInt8(offset + i);
-                    if (avatarCheck == 0) avatarButtons[i].SetActive(false);
-                    if (avatarCheck == 1) avatarButtons[i].SetActive(true);
+                    if (avatarCheck == 0) avatarButtons[i].GetComponent<Image>().color = new Color(.3f, .3f, .3f);
+                    if (avatarCheck == 1) avatarButtons[i].GetComponent<Image>().color = buttonColors[i];
                 }
                 break;
             case "GAME":
