@@ -29,14 +29,14 @@ public class ClientTCP : MonoBehaviour
     public Sprite[] avatarImages = new Sprite[6];
     public GameObject[] avatarPositions = new GameObject[6];
     public GameObject[] avatarButtons = new GameObject[6];
-    public GameObject avatarBase;
-    public GameObject myAvatar;
+    public GameObject avatarBase; // avatar base is the avatar prefab
+    public GameObject myAvatar; // myAvatar is the prefab in the left panel
     private List<GameObject> currAvatars = new List<GameObject>();
+
+    public TMP_Text testingText;
 
     private int currAvatarSelection = 0;
     private string usernameInput;
-
-    // i need by next week to also get stuff on the player page, 6 buttons and an input box
 
     private void Awake()
     {
@@ -85,9 +85,14 @@ public class ClientTCP : MonoBehaviour
 
         string id = buffer.ReadString(0, 4);
 
+        
+
         switch(id)
         {
             case "JOIN":
+
+                testingText.text = "JOIN";
+                //do prints instead
                 if (buffer.Length < 5) return;
 
                 var response = buffer.ReadUInt8(4);
@@ -96,7 +101,7 @@ public class ClientTCP : MonoBehaviour
                 {
                     isHost = true;
                     connectedRoom = buffer.ReadString(5, 4);
-                    roomName.text = "Room Code: " + connectedRoom;
+                    roomName.text = connectedRoom; 
                     SwapScreens("room");
                 }
                 else if (response == 2)
@@ -120,11 +125,13 @@ public class ClientTCP : MonoBehaviour
                 {
                     ServerError("Unknown Error", response);
                 }
-                
+              break;
 
-                break;
             case "LOBY":
                 var numberOfPlayers = buffer.ReadUInt8(4);
+                numberOfPlayers = 1;
+
+                testingText.text = "LOBY";
 
                 if (isHost)
                 {
@@ -134,6 +141,8 @@ public class ClientTCP : MonoBehaviour
                         Destroy(a);
                     }
                     currAvatars.Clear();
+
+
                     for(int i = 0; i < numberOfPlayers; i++)
                     {
                         Canvas c = FindObjectOfType<Canvas>();
@@ -146,6 +155,9 @@ public class ClientTCP : MonoBehaviour
                 }
                 break;
             case "REDY":
+
+                testingText.text = "REDY";
+
                 if (buffer.Length < 6) return;
 
                 int userResponse = buffer.ReadUInt8(4);
@@ -166,7 +178,9 @@ public class ClientTCP : MonoBehaviour
 
                 break;
             case "HUPD":
-                
+
+                testingText.text = "HUPD";
+
                 if (!isHost) return;
                 if (buffer.Length < 7) return;
                 int lengthOfUsername = buffer.ReadUInt8(6);
@@ -175,8 +189,7 @@ public class ClientTCP : MonoBehaviour
 
                 int slot = buffer.ReadUInt8(4);
                 int avatar = buffer.ReadUInt8(5);
-                string username = buffer.ReadString(7, lengthOfUsername);
-                
+                string username = buffer.ReadString(7, lengthOfUsername);               
 
                 currAvatars[slot-1].GetComponentInChildren<Image>().sprite = avatarImages[avatar - 1];
                 currAvatars[slot-1].GetComponentInChildren<TMP_Text>().text = username;
@@ -184,6 +197,9 @@ public class ClientTCP : MonoBehaviour
 
                 break;
             case "PUPD":
+
+                testingText.text = "PUPD";
+
                 if (buffer.Length < 10) return;
                 int offset = 4;
                 for(int i = 0; i < 6; i++)
