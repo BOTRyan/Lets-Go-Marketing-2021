@@ -39,15 +39,24 @@ exports.Client = class Client {
                 this.buffer = this.buffer.slice(8);
 
                 
+                if(responseID == 1) {
+                    const packetJ1 = PacketBuilder.join(responseID, this.room);
 
-                const packetJ = PacketBuilder.join(responseID, this.room);
-
-                this.sendPacket(packetJ);
-
+                    this.sendPacket(packetJ1);    
+                }
+                
                 if(responseID == 2) {
                     this.turnNum = this.server.getPlayersInRoom(this.room);
                     const packetL = PacketBuilder.lobby(this.turnNum);
                     this.server.sendToHost(this.room, packetL);
+
+                    let avatars = [];
+                    for(let i = 0; i < 6; i++) {
+                        avatars[i] = this.server.checkAvatar(i + 1, this.room);
+                    }
+                    const packetJ2 = PacketBuilder.join(responseID, avatars);
+                    this.sendPacket(packetJ2);
+                    
                 }
                 break;
             case "REDY":

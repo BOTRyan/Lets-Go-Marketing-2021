@@ -99,6 +99,7 @@ public class ClientTCP : MonoBehaviour
 
                 if (response == 1)
                 {
+                    if (buffer.Length < 9) return;
                     isHost = true;
                     connectedRoom = buffer.ReadString(5, 4);
                     roomName.text = connectedRoom; 
@@ -106,7 +107,15 @@ public class ClientTCP : MonoBehaviour
                 }
                 else if (response == 2)
                 {
+                    if (buffer.Length < 11) return;
                     connectedRoom = attemptedRoom;
+                    int offsetJoin = 5;
+                    for (int i = 0; i < 6; i++)
+                    {
+                        int avatarCheck = buffer.ReadUInt8(offsetJoin + i);
+                        if (avatarCheck == 0) avatarButtons[i].SetActive(false);
+                        if (avatarCheck == 1) avatarButtons[i].SetActive(true);
+                    }
                     SwapScreens("join");
                 }
                 else if (response == 3)

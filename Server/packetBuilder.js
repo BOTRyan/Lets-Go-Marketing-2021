@@ -1,12 +1,16 @@
 exports.PacketBuilder = {
-    join(responseID, room) {
-        const packet = Buffer.alloc(9);
+    join(responseID, roomOrArray) {
+        const packet = Buffer.alloc(5 + roomOrArray.length);
 
         packet.write("JOIN", 0);
         packet.writeUInt8(responseID, 4);
-
-        if(responseID == 1) packet.write(room, 5);
-        else packet.write("NULL", 5);
+       
+        if(typeof(roomOrArray) === 'string') packet.write(roomOrArray, 5);
+        else if (typeof(roomOrArray) === 'object') {
+            for(let i = 0; i < roomOrArray.length; i++) {
+                packet.writeUInt8(roomOrArray[i], 5 + i);
+            }
+        }
 
         return packet;
     },
