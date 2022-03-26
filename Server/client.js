@@ -102,6 +102,7 @@ exports.Client = class Client {
                 this.server.lockedRooms.push(this.room);
 
                 const packetS = PacketBuilder.update(this.server.game);
+                // TODO: Broadcast packet to room, including host
                 break;
             case "SPIN":
                 break;

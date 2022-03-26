@@ -53,11 +53,12 @@ exports.PacketBuilder = {
         return packet;
     },
     update(game) {
-        const packet = Buffer.alloc(62);
+        const packet = Buffer.alloc(5);
 
         packet.write("GAME", 0);
         packet.writeUInt8(game.currTurn, 4);
-        // Continue once game class is built
+        
+        return packet;
     },
     card(field) {
 

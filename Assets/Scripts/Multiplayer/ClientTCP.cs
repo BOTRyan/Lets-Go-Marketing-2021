@@ -219,6 +219,7 @@ public class ClientTCP : MonoBehaviour
                 }
                 break;
             case "GAME":
+                // TODO: Send client to correct screen the first time a GAME packet is received
                 break;
             case "CARD":
                 break;
@@ -317,4 +318,5 @@ public class ClientTCP : MonoBehaviour
             hostPanel.SetActive(true);
         }
     }
+    // TODO: Create function to send STRT packet to server, tie to button
 }
