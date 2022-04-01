@@ -5,6 +5,8 @@ exports.Server = {
     port: 1111,
     clients: [],
     rooms: ["ABCD"],
+    lockedRooms: [],
+    currentGames: [],
     maxPlayers: 7,
     start(game) {
         this.game = game;

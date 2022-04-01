@@ -34,8 +34,30 @@ public class PacketBuilder
         return packet;
     }
 
-    public static Buffer Spin()
+    public static Buffer Spin(int moveNum)
     {
-        return null;
+        Buffer packet = Buffer.Alloc(5);
+        packet.WriteString("SPIN");
+        packet.WriteUInt8((byte)moveNum, 4);
+
+        return packet;
+    }
+
+    public static Buffer Land(int cardType, int dykCategory = 0)
+    {
+        Buffer packet = Buffer.Alloc(6);
+        packet.WriteString("LAND");
+        packet.WriteUInt8((byte)cardType, 4);
+        packet.WriteUInt8((byte)dykCategory, 5);
+
+        return packet;
+    }
+
+    public static Buffer EndTurn()
+    {
+        Buffer packet = Buffer.Alloc(4);
+        packet.WriteString("ENDT");
+
+        return packet;
     }
 }

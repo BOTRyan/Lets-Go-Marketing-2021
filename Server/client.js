@@ -89,9 +89,6 @@ exports.Client = class Client {
                     this.server.broadcastPacketToRoom(packetP, this.room);
                 } 
                 
-
-                
-
                 this.buffer = this.buffer.slice(6 + usernameLength);
                 const packetR = PacketBuilder.ready(responseType, avatarResponse);
 
@@ -101,12 +98,39 @@ exports.Client = class Client {
             case "STRT":
                 this.server.lockedRooms.push(this.room);
 
+                this.buffer.slice(4);
                 const packetS = PacketBuilder.update(this.server.game);
-                // TODO: Broadcast packet to room, including host
+                // TODO JARED: Broadcast packet to room, including host
                 break;
             case "SPIN":
+                if(this.buffer.length < 5) return;
+                break;
+            case "LAND":
+                if(this.buffer.length < 6) return;
+
+                let cardType = this.buffer.readUInt8(4);
+                if(cardType == 4) {
+                    let categoryNum = this.buffer.readUint8(5);
+                    if(categoryNum == 0) return;
+                    //TODO JOURNEY: Grab a number based on the categoryNum
+                }
+                this.buffer = this.buffer.slice(6);
+                // TODO JOURNEY: Construct a CARD packet to send either to one or several players, and the host
                 break;
             case "CARD":
+                if(this.buffer.length < 5) return;
+                let actionType = this.buffer.readUInt8(4);
+                if(actionType == 1) {
+                    //TODO JOURNEY: Construct a MOVE packet with the appropriate number of spaces to move
+                }
+                else if(actionType == 2) {
+                    //TODO JOURNEY: Construct a CUPD packet to send to host
+                }
+                else {
+                    return;
+                }
+                break;
+            case "ENDT":
                 break;
             case "CRER":
                 break;

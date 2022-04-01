@@ -223,6 +223,10 @@ public class ClientTCP : MonoBehaviour
                 break;
             case "CARD":
                 break;
+            case "MOVE":
+                break;
+            case "CUPD":
+                break;
             case "FINL":
                 break;
             case "RSET":

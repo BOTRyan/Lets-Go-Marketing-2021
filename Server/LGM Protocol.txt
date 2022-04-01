@@ -14,6 +14,20 @@ Avatar Numbers:
 5: Purple
 6: Pink
 
+Card Type Numbers:
+1: Brand Crisis
+2: Career Point
+3: YTB
+4: DYK
+5: End
+
+Token Numbers:
+1: Design
+2: Public Relations
+3: Business Data Management
+4: Graphic Media Management
+5: Marketing
+
 Packets from Server:
 --------------------
 
@@ -84,8 +98,14 @@ GAME - updates the game board for host player, updates data for all other player
     ---------------------------------------------------------
     0   4   ascii       packet type: "GAME"
     4   1   uint8       current turn (1-6)
-    5   1   uint8	    type of board space landed on (1-5)
-    6   56  uint8 x 56  number of players on each board space (maybe?)
+
+MOVE - tells the host to move the given player a certain amount of spaces
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "MOVE"
+    4   1   uint8       current turn of moving player (1-6)
+    5   1   uint8	how many spaces to move
     
 CARD - if a space is supposed to send out a card to a player, send them the correct card
 
@@ -94,6 +114,13 @@ CARD - if a space is supposed to send out a card to a player, send them the corr
     0   4   ascii       packet type: "CARD"
     4   1   uint8       type of card being sent
     5   1   uint8       which card of given type is being sent
+
+CUPD - for YTB or DYK cards, send an update to the host whenever a player makes their decision
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "CUPD"
+    4   1   uint8       player being updated (1-6)
 
 FINL - once the game's completed, order the players by the place in which they finished
 
@@ -144,6 +171,15 @@ SPIN - this packet should be submitted when the player spins the spinner
     0   4   ascii       packet type: "SPIN"
     4   1   uint8	number landed on
 
+LAND - sent by the host after moving the appropriate amount of spaces
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "LAND"
+    4   1   uint8       card to be selected (1-5)
+
+    5	1   uint8	category of DYK cards (
+
 CARD - this packet should be submitted when the player responds to a card
 
     O   L   Datatype    Desc
@@ -153,6 +189,12 @@ CARD - this packet should be submitted when the player responds to a card
 
     5   1   int8        number of spaces to move (if 1)
     5 	1   uint8 	    numerical value of token to be added (if 2)
+
+ENDT - send by the host to indicate to the server that the turn is completed, which will update currTurn
+
+    O   L   Datatype    Desc
+    ---------------------------------------------------------
+    0   4   ascii       packet type: "ENDT"
 
 CRER - this packet should be submitted when the player inputs their desired field and career after
 finishing the board

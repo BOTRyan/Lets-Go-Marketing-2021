@@ -60,8 +60,26 @@ exports.PacketBuilder = {
         
         return packet;
     },
-    card(field) {
+    card(numberFromField) {
+        const packet = Buffer.alloc(5);
+        packet.write("CARD", 0);
+        packet.writeUInt8(numberFromField, 4);
 
+        return packet;
+    },
+    move(moveNum) {
+        const packet = Buffer.alloc(5);
+        packet.write("MOVE", 0);
+        packet.writeUInt8(moveNum, 4);
+
+        return packet;
+    },
+    cardUpdate(playerNum) {
+        const packet = Buffer.alloc(5);
+        packet.write("CUPD", 0);
+        packet.writeUInt8(playerNum, 4);
+
+        return packet;
     },
     final() {
 
