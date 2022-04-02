@@ -85,9 +85,9 @@ public class ClientTCP : MonoBehaviour
 
         string id = buffer.ReadString(0, 4);
 
-        
 
-        switch(id)
+
+        switch (id)
         {
             case "JOIN":
 
@@ -102,7 +102,7 @@ public class ClientTCP : MonoBehaviour
                     if (buffer.Length < 9) return;
                     isHost = true;
                     connectedRoom = buffer.ReadString(5, 4);
-                    roomName.text = connectedRoom; 
+                    roomName.text = connectedRoom;
                     SwapScreens("room");
                 }
                 else if (response == 2)
@@ -134,33 +134,24 @@ public class ClientTCP : MonoBehaviour
                 {
                     ServerError("Unknown Error", response);
                 }
-              break;
+                break;
 
             case "LOBY":
                 var numberOfPlayers = buffer.ReadUInt8(4);
-                numberOfPlayers = 1;
 
                 testingText.text = "LOBY";
 
                 if (isHost)
                 {
                     playerNum.text = "Players in room: " + numberOfPlayers.ToString();
-                    foreach(GameObject a in currAvatars)
-                    {
-                        Destroy(a);
-                    }
-                    currAvatars.Clear();
 
+                    Canvas c = FindObjectOfType<Canvas>();
+                    GameObject newAvatar = Instantiate(avatarBase, c.transform);
+                    newAvatar.GetComponentInChildren<TMP_Text>().text = "Waiting...";
+                    newAvatar.transform.position = avatarPositions[numberOfPlayers-1].transform.position;
 
-                    for(int i = 0; i < numberOfPlayers; i++)
-                    {
-                        Canvas c = FindObjectOfType<Canvas>();
-                        GameObject newAvatar = Instantiate(avatarBase, c.transform);
-                        newAvatar.GetComponentInChildren<TMP_Text>().text = "Waiting...";
-                        newAvatar.transform.position = avatarPositions[i].transform.position;
-                        
-                        currAvatars.Add(newAvatar);
-                    }
+                    currAvatars.Add(newAvatar);
+                
                 }
                 break;
             case "REDY":
@@ -170,11 +161,13 @@ public class ClientTCP : MonoBehaviour
                 if (buffer.Length < 6) return;
 
                 int userResponse = buffer.ReadUInt8(4);
+                print(userResponse);
                 if(userResponse > 1)
                 {
                     // Send username error message
                 }
                 int avatarResponse = buffer.ReadUInt8(5);
+                print(avatarResponse);
                 if(avatarResponse == 0)
                 {
                     currAvatarSelection = 0;

@@ -48,8 +48,7 @@ exports.PacketBuilder = {
         packet.write("REDY", 0);
         packet.writeUInt8(usernameResponse, 4);
         packet.writeUInt8(avatarResponse, 5);
-
-
+        console.log("Delay packet to update all players correctly");
         return packet;
     },
     update(game) {
