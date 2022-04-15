@@ -17,7 +17,7 @@ public class ClientTCP : MonoBehaviour
     private int port = 1111;
 
     public TMP_InputField roomInput;
-    public GameObject roomPanel, joinPanel, hostPanel, playerPanel, errorPanel;
+    public GameObject roomPanel, joinPanel, hostPanel, playerPanel, playerWaitingPanel, errorPanel;
     public bool isHost = false;
     public string connectedRoom, attemptedRoom;
 
@@ -30,16 +30,22 @@ public class ClientTCP : MonoBehaviour
     public GameObject[] avatarPositions = new GameObject[6];
     public GameObject[] avatarButtons = new GameObject[6];
     public GameObject avatarBase; // avatar base is the avatar prefab
-    public GameObject myAvatar; // myAvatar is the prefab in the left panel
+    public GameObject myAvatar; // this is the avatar for these few panels
     private List<GameObject> currAvatars = new List<GameObject>();
 
     public TMP_Text testingText;
+    private AvatarAnimation animatedDog;
+    public PlayerInfo playerInfo;
 
     private int currAvatarSelection = 0;
     private string usernameInput;
 
     private void Awake()
     {
+        animatedDog = myAvatar.GetComponentInChildren<AvatarAnimation>();
+        //UpdatePersonalAvatar();
+
+
         if(singleton)
         {
             Destroy(gameObject);
@@ -85,7 +91,7 @@ public class ClientTCP : MonoBehaviour
 
         string id = buffer.ReadString(0, 4);
 
-        
+        Debug.Log("color"); // debug isn't working for some reason
 
         switch(id)
         {
@@ -152,10 +158,11 @@ public class ClientTCP : MonoBehaviour
                     currAvatars.Clear();
 
 
-                    for(int i = 0; i < numberOfPlayers; i++)
+                    for(int i = 0; i < numberOfPlayers; i++) // so does this only run once? // actually no I don't think it does because more players can join over time
                     {
                         Canvas c = FindObjectOfType<Canvas>();
-                        GameObject newAvatar = Instantiate(avatarBase, c.transform);
+                        GameObject newAvatar = Instantiate(avatarBase, c.transform); // ah so here we're creating the other avatars you see on the host page, so this isn't too important to us
+                        // but this is interesting. on the bright side, the players will be sitting and already have their colors chosen by the time they get to this screen
                         newAvatar.GetComponentInChildren<TMP_Text>().text = "Waiting...";
                         newAvatar.transform.position = avatarPositions[i].transform.position;
                         
@@ -182,7 +189,9 @@ public class ClientTCP : MonoBehaviour
 
                 if(userResponse == 1 && avatarResponse == 1)
                 {
-                    UpdatePersonalAvatar(usernameInput, currAvatarSelection);
+                    UpdatePersonalAvatar(usernameInput, currAvatarSelection); // i think this is the screen we wanna be in
+                    // the thing that sucks is that we would need global player stats if we want to make the dog be the same between panels
+                    // ... hmm actually that is weird I think we might need to do that honestly
                 }
 
                 break;
@@ -236,9 +245,11 @@ public class ClientTCP : MonoBehaviour
 
     private void UpdatePersonalAvatar(string name, int avatarNum)
     {
-        myAvatar.GetComponentInChildren<Image>().sprite = avatarImages[avatarNum];
+        
+        //myAvatar.GetComponentInChildren<Image>().sprite = avatarImages[avatarNum];
+        playerInfo.color = avatarNum; // change stuff on playerInfo script (I didn't make this and I'm not even really using it yet)
+        animatedDog.playerColor = playerInfo.color; // change which series of animations to play based on color
         myAvatar.GetComponentInChildren<TMP_Text>().text = name;
-
         myAvatar.SetActive(true);
     }
 
@@ -269,6 +280,7 @@ public class ClientTCP : MonoBehaviour
 
     public void OnConnectRoom()
     {
+        Debug.Log("onConnectRoom");
         TryConnect(serverHost, port);
         attemptedRoom = roomInput.text;
         
@@ -278,6 +290,12 @@ public class ClientTCP : MonoBehaviour
 
     public void OnChooseAvatar(int selection)
     {
+        Debug.Log("updating avatar");
+
+        animatedDog.ChangeColor(selection - 1); // thank fucking god, this actually got rid of the lag I think
+        animatedDog.ChangeState(1); // make dog start sitting, when we select a color, make it move
+
+        //animatedDog.playerColor = selection - 1; // change which series of animations to play based on color
         currAvatarSelection = selection - 1;
     }
     public void OnUsernameEndEdit()
@@ -286,8 +304,10 @@ public class ClientTCP : MonoBehaviour
     }
     public void OnSubmitPlayer()
     {
+        Debug.Log("submitting");
         Buffer packet = PacketBuilder.Ready(usernameInput, currAvatarSelection + 1);
         SendPacketToServer(packet);
+        SwapScreens("waiting");
     }
 
     public void OnButtonHost()
@@ -310,11 +330,23 @@ public class ClientTCP : MonoBehaviour
         {
             joinPanel.SetActive(false);
             playerPanel.SetActive(true);
+            myAvatar.SetActive(true); // make the avatar visible on screen swap
         }
         else if(newScreen == "room")
         {
             joinPanel.SetActive(false);
             hostPanel.SetActive(true);
         }
+        else if (newScreen == "waiting")
+        {
+            playerPanel.SetActive(false);
+            playerWaitingPanel.SetActive(true);
+            myAvatar.transform.localPosition = new Vector2(0, 0); // this is gross but it works for now, on screen change, just move the dog to the new location, same color, still walking
+        }
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("playerLobbyScene");
     }
 }

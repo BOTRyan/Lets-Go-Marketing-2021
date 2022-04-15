@@ -29,6 +29,9 @@ public class PlayerInfo : MonoBehaviour
     public int place = 0;
     public bool isPlaying;
 
+    public int color = 0; // 0-5, red yellow green blue purple pink
+    // 
+
     // Start is called before the first frame update
     void Start()
     {
