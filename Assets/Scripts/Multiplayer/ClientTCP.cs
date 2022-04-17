@@ -110,6 +110,7 @@ public class ClientTCP : MonoBehaviour
                     connectedRoom = buffer.ReadString(5, 4);
                     roomName.text = connectedRoom; 
                     SwapScreens("room");
+                    
                 }
                 else if (response == 2)
                 {
@@ -123,6 +124,7 @@ public class ClientTCP : MonoBehaviour
                         if (avatarCheck == 1) avatarButtons[i].SetActive(true);
                     }
                     SwapScreens("join");
+                    myAvatar.GetComponentInChildren<TMP_Text>().text = "";
                 }
                 else if (response == 3)
                 {
@@ -247,8 +249,8 @@ public class ClientTCP : MonoBehaviour
     {
         
         //myAvatar.GetComponentInChildren<Image>().sprite = avatarImages[avatarNum];
-        playerInfo.color = avatarNum; // change stuff on playerInfo script (I didn't make this and I'm not even really using it yet)
-        animatedDog.playerColor = playerInfo.color; // change which series of animations to play based on color
+        //playerInfo.color = avatarNum; // change stuff on playerInfo script (I didn't make this and I'm not even really using it yet)
+        animatedDog.playerColor = avatarNum; // change which series of animations to play based on color
         myAvatar.GetComponentInChildren<TMP_Text>().text = name;
         myAvatar.SetActive(true);
     }

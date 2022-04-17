@@ -8321,11 +8321,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AnimatedAvatar
       objectReference: {fileID: 0}
-    - target: {fileID: 820608602462581812, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 820608602462581813, guid: e49af83d7b777d94fa539011f330eac7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8431,68 +8426,5 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 820608602904059958, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: animationControllers.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 820608602904059958, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: playerColor
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 820608602904059958, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: playerAction
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 820608602904059958, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: animationController
-      value: 
-      objectReference: {fileID: 22100000, guid: b886cb45776535c4c8c0ec6624e22bd1,
-        type: 2}
-    - target: {fileID: 820608602904059958, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: animationControllers.Array.data[0]
-      value: 
-      objectReference: {fileID: 22100000, guid: b540db47496d61046b3c3cd13a1ff5d6,
-        type: 2}
-    - target: {fileID: 820608602904059958, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: animationControllers.Array.data[1]
-      value: 
-      objectReference: {fileID: 22100000, guid: c02178c6e393dcb40b78bf25b2d95b4f,
-        type: 2}
-    - target: {fileID: 820608602904059958, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: animationControllers.Array.data[2]
-      value: 
-      objectReference: {fileID: 22100000, guid: b886cb45776535c4c8c0ec6624e22bd1,
-        type: 2}
-    - target: {fileID: 820608602904059958, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: animationControllers.Array.data[3]
-      value: 
-      objectReference: {fileID: 22100000, guid: 907e17375a0c15440a02a4e7e3371b10,
-        type: 2}
-    - target: {fileID: 820608602904059958, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: animationControllers.Array.data[4]
-      value: 
-      objectReference: {fileID: 22100000, guid: 3c92e6a2d55e6564fa575dfe7102cfca,
-        type: 2}
-    - target: {fileID: 820608602904059958, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: animationControllers.Array.data[5]
-      value: 
-      objectReference: {fileID: 22100000, guid: 6c3742169bea98b458af1fe03a87668c,
-        type: 2}
-    - target: {fileID: 820608602904059959, guid: e49af83d7b777d94fa539011f330eac7,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 22100000, guid: b540db47496d61046b3c3cd13a1ff5d6,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e49af83d7b777d94fa539011f330eac7, type: 3}
