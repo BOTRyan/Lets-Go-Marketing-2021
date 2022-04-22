@@ -31,16 +31,16 @@ exports.Client = class Client {
 
         const packetIdentifier = this.buffer.slice(0, 4).toString();
 
-        switch(packetIdentifier) {
+        switch (packetIdentifier) {
             case "JOIN":
-                if(this.buffer.length < 8) return;
-                this.room = this.buffer.slice(4, 8).toString();
+                console.log(this.buffer.length);
+                if (this.buffer.length < 8) return;
+                this.room = this.buffer.slice(5, 8).toString();
                 let responseID = this.server.joinResponse(this);
                 this.buffer = this.buffer.slice(8);
 
-                
                 if(responseID == 1) {
-                    const packetJ1 = PacketBuilder.join(responseID, this.room);
+                    const packetJ1 = PacketBuilder.join(responseID, this.room, -1);
 
                     this.sendPacket(packetJ1);    
                 }
@@ -54,7 +54,7 @@ exports.Client = class Client {
                     for(let i = 0; i < 6; i++) {
                         avatars[i] = this.server.checkAvatar(i + 1, this.room);
                     }
-                    const packetJ2 = PacketBuilder.join(responseID, avatars);
+                    const packetJ2 = PacketBuilder.join(responseID, avatars, this.server.getPlayersInRoom());
                     this.sendPacket(packetJ2);
                     
                 }
@@ -100,7 +100,7 @@ exports.Client = class Client {
 
                 this.buffer.slice(4);
                 const packetS = PacketBuilder.update(this.server.game);
-                // TODO JARED: Broadcast packet to room, including host
+                this.server.broadcastPacketToRoom(packetS, this.room, true); // TODO JARED: Broadcast packet to room, including host
                 break;
             case "SPIN":
                 if(this.buffer.length < 5) return;

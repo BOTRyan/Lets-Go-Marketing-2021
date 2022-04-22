@@ -17,12 +17,12 @@ public class ClientTCP : MonoBehaviour
     private int port = 1111;
 
     public TMP_InputField roomInput;
-    public GameObject roomPanel, joinPanel, hostPanel, playerPanel, errorPanel;
+    public GameObject roomPanel, joinPanel, hostPanel, playerPanel, errorPanel, testHostGamePanel, testPlayerGamePanel, yourTurnPanel;
     public bool isHost = false;
     public string connectedRoom, attemptedRoom;
 
     public TMP_Text roomName, responseFeedback, errorNum;
-    public TMP_Text playerNum;
+    public TMP_Text playerNumText;
 
     public TMP_InputField usernameInputField;
 
@@ -36,6 +36,7 @@ public class ClientTCP : MonoBehaviour
     public TMP_Text testingText;
 
     private int currAvatarSelection = 0;
+    private int playerNumber;
     private string usernameInput;
 
     private void Awake()
@@ -93,23 +94,27 @@ public class ClientTCP : MonoBehaviour
 
                 testingText.text = "JOIN";
                 //do prints instead
-                if (buffer.Length < 5) return;
-
+                if (buffer.Length < 6) return;
                 var response = buffer.ReadUInt8(4);
+                playerNumber = buffer.ReadUInt8(5);
+
+                print(buffer);
+                print("JOIN" + response + playerNumber + buffer.ReadString(6, 4));
+                print(buffer.Length);
 
                 if (response == 1)
                 {
-                    if (buffer.Length < 9) return;
+                    if (buffer.Length < 10) return;
                     isHost = true;
-                    connectedRoom = buffer.ReadString(5, 4);
+                    connectedRoom = buffer.ReadString(6, 4);
                     roomName.text = connectedRoom; 
                     SwapScreens("room");
                 }
                 else if (response == 2)
                 {
-                    if (buffer.Length < 11) return;
+                    if (buffer.Length < 12) return;
                     connectedRoom = attemptedRoom;
-                    int offsetJoin = 5;
+                    int offsetJoin = 6;
                     for (int i = 0; i < 6; i++)
                     {
                         int avatarCheck = buffer.ReadUInt8(offsetJoin + i);
@@ -144,7 +149,7 @@ public class ClientTCP : MonoBehaviour
 
                 if (isHost)
                 {
-                    playerNum.text = "Players in room: " + numberOfPlayers.ToString();
+                    //playerNum.text = "Players in room: " + numberOfPlayers.ToString();
                     foreach(GameObject a in currAvatars)
                     {
                         Destroy(a);
@@ -219,6 +224,15 @@ public class ClientTCP : MonoBehaviour
                 }
                 break;
             case "GAME":
+                int playerTurn = buffer.ReadUInt8(4);
+                if (isHost)
+                {
+                    SwapScreens("hostGame");
+                }
+                else
+                {
+                    SwapScreens("playerGame");
+                }
                 // TODO: Send client to correct screen the first time a GAME packet is received
                 break;
             case "CARD":
@@ -302,6 +316,12 @@ public class ClientTCP : MonoBehaviour
         SendPacketToServer(packet);
     }
 
+    public void OnButtonStart() // TODO: Create function to send STRT packet to server, tie to button
+    {
+        Buffer packet = PacketBuilder.Start();
+        SendPacketToServer(packet);
+    }
+
     private void ServerError(string feedbackTxt, int errNum)
     {
         errorPanel.SetActive(true);
@@ -321,6 +341,15 @@ public class ClientTCP : MonoBehaviour
             joinPanel.SetActive(false);
             hostPanel.SetActive(true);
         }
+        else if(newScreen == "hostGame")
+        {
+            hostPanel.SetActive(false);
+            testHostGamePanel.SetActive(true);
+        }
+        else if (newScreen == "playerGame")
+        {
+            playerPanel.SetActive(false);
+            testPlayerGamePanel.SetActive(true);
+        }
     }
-    // TODO: Create function to send STRT packet to server, tie to button
 }

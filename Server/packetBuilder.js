@@ -1,17 +1,19 @@
 exports.PacketBuilder = {
-    join(responseID, roomOrArray) {
-        const packet = Buffer.alloc(5 + roomOrArray.length);
+    join(responseID, roomOrArray, numPlayers) {
+        const packet = Buffer.alloc(6 + roomOrArray.length);
 
         packet.write("JOIN", 0);
         packet.writeUInt8(responseID, 4);
+        packet.writeUInt8(numPlayers + 1, 5)
        
-        if(typeof(roomOrArray) === 'string') packet.write(roomOrArray, 5);
+        if(typeof(roomOrArray) === 'string') packet.write(roomOrArray, 6);
         else if (typeof(roomOrArray) === 'object') {
             for(let i = 0; i < roomOrArray.length; i++) {
-                packet.writeUInt8(roomOrArray[i], 5 + i);
+                packet.writeUInt8(roomOrArray[i], 6 + i);
             }
         }
 
+        console.log("please work");
         return packet;
     },
     lobby(numPlayers) {

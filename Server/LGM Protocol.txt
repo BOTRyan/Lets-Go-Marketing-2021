@@ -38,9 +38,13 @@ not the client is allowed to join.
     ---------------------------------------------------------
     0   4   ascii       packet type: "JOIN"
     4   1   uint8	join response
+    5   1   uint8       player number
 
-    5   4   ascii	room name (if host)
-    5	6   uint8x6	current chosen avatars (if player)
+    if host:
+    6   4   ascii	room name
+    if player:
+    6	6   uint8x6	current chosen avatars
+    
 
     (accepted:)
     1: Host
