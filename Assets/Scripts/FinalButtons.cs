@@ -30,9 +30,7 @@ public class FinalButtons : MonoBehaviour, IPointerDownHandler
     private static extern void openWindow(string url);
     public void OpenLinkJSPlugin()
     {
-#if !UNITY_EDITOR
-		openWindow("https://ferrisdsgn.typeform.com/to/hIYzD9Jv");
-#endif
+        openWindow("https://ferrisdsgn.typeform.com/to/hIYzD9Jv");
     }
     /// MY STUFF end
 
@@ -50,6 +48,8 @@ public class FinalButtons : MonoBehaviour, IPointerDownHandler
     {
         if (GameManager.instance)
             Destroy(GameManager.instance.gameObject);
+        if (AudioManager.instance)
+            Destroy(AudioManager.instance.gameObject);
         SceneManager.LoadScene("startScene");
     }
 
